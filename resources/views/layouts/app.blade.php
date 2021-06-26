@@ -29,6 +29,13 @@
       @yield('content')
     </main>
   </div>
+
+  <script>
+    function togglePasswordVisible() {
+      const passwordInput = document.getElementById("password");
+      passwordInput.type === "password" ? passwordInput.type = "text" : passwordInput.type = "password";
+    }
+  </script>
 </body>
 
 </html>

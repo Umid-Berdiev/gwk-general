@@ -4,29 +4,120 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+require("./bootstrap");
 
-window.Vue = require('vue').default;
+// window.Vue = require("vue").default;
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+import Vue from "vue/dist/vue.js";
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+// Import Bootstrap
+import "bootstrap/dist/css/bootstrap.css";
+import "leaflet/dist/leaflet.js";
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-const app = new Vue({
-    el: '#app',
+const header = new Vue({
+  el: "#header",
+  methods: {
+    toggleSidebar() {
+      toggleSidebar();
+    }
+  }
 });
+
+const sidebarMenu = new Vue({
+  el: "#sidebar-menu",
+
+  data() {
+    return {
+      isShown1: false,
+      isShown2: false,
+      isShown3: false,
+      isShown4: false,
+      langs: false
+    };
+  },
+
+  mounted() {
+    toggleSidebar();
+    responseLayout();
+    if (sessionStorage.getItem("isShown1")) {
+      this.isShown1 = JSON.parse(sessionStorage.getItem("isShown1"));
+    }
+    if (sessionStorage.getItem("isShown2")) {
+      this.isShown2 = JSON.parse(sessionStorage.getItem("isShown2"));
+    }
+    if (sessionStorage.getItem("isShown3")) {
+      this.isShown3 = JSON.parse(sessionStorage.getItem("isShown3"));
+    }
+    if (sessionStorage.getItem("isShown4")) {
+      this.isShown4 = JSON.parse(sessionStorage.getItem("isShown4"));
+    }
+    if (sessionStorage.getItem("langs")) {
+      this.langs = JSON.parse(sessionStorage.getItem("langs"));
+    }
+  },
+
+  methods: {
+    persist(key) {
+      if (key == "isShown1") {
+        this.isShown1 = !this.isShown1;
+        sessionStorage.setItem(key, this.isShown1);
+        sessionStorage.setItem("isShown2", false);
+        sessionStorage.setItem("isShown3", false);
+        sessionStorage.setItem("isShown4", false);
+      } else if (key == "isShown2") {
+        this.isShown2 = !this.isShown2;
+        sessionStorage.setItem("isShown1", false);
+        sessionStorage.setItem(key, this.isShown2);
+        sessionStorage.setItem("isShown3", false);
+        sessionStorage.setItem("isShown4", false);
+      } else if (key == "isShown3") {
+        this.isShown3 = !this.isShown3;
+        sessionStorage.setItem("isShown1", false);
+        sessionStorage.setItem("isShown2", false);
+        sessionStorage.setItem(key, this.isShown3);
+        sessionStorage.setItem("isShown4", false);
+      } else if (key == "isShown4") {
+        this.isShown4 = !this.isShown4;
+        sessionStorage.setItem("isShown1", false);
+        sessionStorage.setItem("isShown2", false);
+        sessionStorage.setItem("isShown3", false);
+        sessionStorage.setItem(key, this.isShown4);
+      } else if (key == "langs") {
+        this.langs = !this.langs;
+        sessionStorage.setItem("isShown1", false);
+        sessionStorage.setItem("isShown2", false);
+        sessionStorage.setItem("isShown3", false);
+        sessionStorage.setItem("isShown4", false);
+        sessionStorage.setItem(key, this.langs);
+      } else {
+        sessionStorage.setItem("isShown1", false);
+        sessionStorage.setItem("isShown2", false);
+        sessionStorage.setItem("isShown3", false);
+        sessionStorage.setItem("isShown4", false);
+        sessionStorage.setItem("langs", false);
+      }
+    }
+  }
+});
+
+function toggleSidebar() {
+  let sidebar = document.getElementById("sidebar-menu");
+  let content = document.getElementById("main-content");
+
+  if (sidebar && content) {
+    sidebar.classList.toggle("d-none");
+    content.classList.toggle("col-md-9");
+    content.classList.toggle("col-lg-10");
+  }
+}
+
+function responseLayout() {
+  let header = document.getElementById("header");
+  let sidebarSticky = document.querySelector(".sidebar-sticky");
+  let sidebar = document.getElementById("sidebar-menu");
+
+  if (header && sidebarSticky && sidebar) {
+    sidebar.style.top = header.offsetHeight + "px";
+    sidebarSticky.style.height = `calc(100vh - ${header.offsetHeight}px)`;
+  }
+}

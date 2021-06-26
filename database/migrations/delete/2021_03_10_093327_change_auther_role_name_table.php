@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\Additional\Roles;
+use App\Models\Additional\Role;
 
 class ChangeAutherRoleNameTable extends Migration
 {
@@ -14,7 +14,7 @@ class ChangeAutherRoleNameTable extends Migration
      */
     public function up()
     {
-        $role = Roles::where(['name' => 'Auther'])->first();
+        $role = Role::where(['name' => 'Auther'])->first();
         if($role) {
             $role->name = 'Author';
             $role->save();

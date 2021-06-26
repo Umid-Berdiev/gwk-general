@@ -2,186 +2,97 @@
 
 namespace App\Http\Controllers\General;
 
-use App\General\RiverFlowRecources;
-use App\General\UiReserfs;
-use App\General\Wateruse;
+use App\Models\General\RiverFlowRecources;
+use App\Models\General\UiReserfs;
+use App\Models\General\Wateruse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class UwReserfController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
-    {
-	    if(Auth::user()->org_name == 'gidrogeologiya' || Auth::user()->org_name == 'other')
-	    {
-		    $uw_resers  = UiReserfs::where('years',$request->year)->count();
-            $last_update_date = UiReserfs::select('updated_at','user_id','is_approve','years')
-                ->where('years',$request->year)
-                ->orderBy('updated_at','DESC')
-                ->first();
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function index(Request $request)
+  {
+    $user_resource_types = getUserResourceTypes();
 
-            if($uw_resers == 0)
-		    {
-			    $uw_reserfs = new UiReserfs();
-			    $uw_reserfs->region_name = "Республика Каракалпакистан";
-			    $uw_reserfs->years = $request->year;
-                $uw_reserfs->user_id = Auth::id();
-                $uw_reserfs->is_approve=false;
-			    $uw_reserfs->save();
+    $region_names = getRegionNames();
 
-			    $resource_regions = new UiReserfs();
-			    $resource_regions->region_name = "Андижанский";
-			    $resource_regions->years = $request->year;
-                $uw_reserfs->user_id = Auth::id();
-                $uw_reserfs->is_approve=false;
-			    $resource_regions->save();
+    if (auth()->user()->org_name == 'gidrogeologiya' || auth()->user()->org_name == 'other') {
+      $uw_resers  = UiReserfs::where('years', $request->selected_year)->count();
+      $last_update_date = UiReserfs::select('updated_at', 'user_id', 'is_approve', 'years')
+        ->where('years', $request->selected_year)
+        ->orderBy('updated_at', 'DESC')
+        ->first();
 
-			    $resource_regions = new UiReserfs();
-			    $resource_regions->years = $request->year;
-			    $resource_regions->region_name = "Бухарский";
-                $uw_reserfs->user_id = Auth::id();
-                $uw_reserfs->is_approve=false;
-			    $resource_regions->save();
-
-			    $resource_regions = new UiReserfs();
-			    $resource_regions->region_name = "Джизакский";
-			    $resource_regions->years = $request->year;
-                $uw_reserfs->user_id = Auth::id();
-                $uw_reserfs->is_approve=false;
-			    $resource_regions->save();
-
-			    $resource_regions = new UiReserfs();
-			    $resource_regions->region_name = "Кашкадарьинский";
-			    $resource_regions->years = $request->year;
-                $uw_reserfs->user_id = Auth::id();
-                $uw_reserfs->is_approve=false;
-			    $resource_regions->save();
-
-			    $resource_regions = new UiReserfs();
-			    $resource_regions->region_name = "Навоиский";
-			    $resource_regions->years = $request->year;
-                $uw_reserfs->user_id = Auth::id();
-                $uw_reserfs->is_approve=false;
-			    $resource_regions->save();
-
-			    $resource_regions = new UiReserfs();
-			    $resource_regions->region_name = "Наманганский";
-			    $resource_regions->years = $request->year;
-                $uw_reserfs->user_id = Auth::id();
-                $uw_reserfs->is_approve=false;
-			    $resource_regions->save();
-
-			    $resource_regions = new UiReserfs();
-			    $resource_regions->region_name = "Самаркандский";
-			    $resource_regions->years = $request->year;
-                $uw_reserfs->user_id = Auth::id();
-                $uw_reserfs->is_approve=false;
-			    $resource_regions->save();
-
-			    $resource_regions = new UiReserfs();
-			    $resource_regions->region_name = "Сурхандарьинский";
-			    $resource_regions->years = $request->year;
-                $uw_reserfs->user_id = Auth::id();
-                $uw_reserfs->is_approve=false;
-			    $resource_regions->save();
-
-			    $resource_regions = new UiReserfs();
-			    $resource_regions->region_name = "Сырдарьинский";
-			    $resource_regions->years = $request->year;
-                $uw_reserfs->user_id = Auth::id();
-                $uw_reserfs->is_approve=false;
-			    $resource_regions->save();
-
-			    $resource_regions = new UiReserfs();
-			    $resource_regions->region_name = "Ташкентский";
-			    $resource_regions->years = $request->year;
-                $uw_reserfs->user_id = Auth::id();
-                $uw_reserfs->is_approve=false;
-			    $resource_regions->save();
-
-			    $resource_regions = new UiReserfs();
-			    $resource_regions->region_name = "Ферганский";
-			    $resource_regions->years = $request->year;
-                $uw_reserfs->user_id = Auth::id();
-                $uw_reserfs->is_approve=false;
-			    $resource_regions->save();
-
-			    $resource_regions = new UiReserfs();
-			    $resource_regions->region_name = "Хорезмский";
-			    $resource_regions->years = $request->year;
-                $uw_reserfs->user_id = Auth::id();
-                $uw_reserfs->is_approve=false;
-			    $resource_regions->save();
-
-			    $resource_regions = new UiReserfs();
-			    $resource_regions->region_name = " Всего Республика Узбекистан";
-			    $resource_regions->years = $request->year;
-                $uw_reserfs->user_id = Auth::id();
-                $uw_reserfs->is_approve=false;
-			    $resource_regions->save();
-
-                $uw_resers = UiReserfs::where('years',$request->year)->orderby('id','ASC')->get();
-
-                return view('general.pages.resources.uw_reserfs.uw_reserf',[
-				    'uw_reserfs'=>$uw_resers,
-				    'year' => $request->year,
-                    'id' => $request->id,
-                    'last_update' => $last_update_date
-                ]);
-		    }
-		    else
-		    {
-			    $uw_resers = UiReserfs::where('years',$request->year)->orderby('id','ASC')->get();
-			    return view('general.pages.resources.uw_reserfs.uw_reserf',[
-				    'uw_reserfs'=>$uw_resers,
-				    'year' => $request->year,
-                    'id' => $request->id,
-                    'last_update' => $last_update_date
-                ]);
-		    }
-	    }
-	    else
-	    {
-	    	abort(404);
-	    }
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-	    switch ($request->func)
-	    {
-		    case "total":
-			    UiReserfs::where('id',$request->ids)->update(['user_id'=>Auth::id(),'is_approve'=>false,'total'=>$request->param]);
-			    break;
-		    case 'surface_water':
-			    UiReserfs::where('id',$request->ids)->update(['user_id'=>Auth::id(),'is_approve'=>false,'surface_water'=>$request->param]);
-			    break;
-		    case 'ex_reserf':
-			    UiReserfs::where('id',$request->ids)->update(['user_id'=>Auth::id(),'is_approve'=>false,'ex_reserf'=>$request->param]);
-			    break;
-	    }
-    }
-
-    public function Accept(Request $request)
-    {
-        if(Auth::user()->org_name == 'gidromet')
-        {
-            $resources = UiReserfs::where('years', $request->get('year'))->update(['user_id' => Auth::id(), 'is_approve' => true]);
+      if ($uw_resers == 0) {
+        foreach ($region_names as $region_name) {
+          $uw_reserfs = new UiReserfs();
+          $uw_reserfs->region_name = $region_name;
+          $uw_reserfs->years = $request->selected_year;
+          $uw_reserfs->user_id = auth()->id();
+          $uw_reserfs->is_approve = false;
+          $uw_reserfs->save();
         }
 
-        return redirect()->back();
+        $uw_resers = UiReserfs::where('years', $request->selected_year)->orderby('id', 'ASC')->get();
+
+        return view('general.pages.resources.uw_reserfs.uw_reserf', [
+          'uw_reserfs' => $uw_resers,
+          'selected_year' => $request->selected_year,
+          'selected_type_value' => $request->selected_type_value,
+          'last_update' => $last_update_date,
+          'user_resource_types' => $user_resource_types
+        ]);
+      } else {
+        $uw_resers = UiReserfs::where('years', $request->selected_year)->orderby('id', 'ASC')->get();
+        return view('general.pages.resources.uw_reserfs.uw_reserf', [
+          'uw_reserfs' => $uw_resers,
+          'selected_year' => $request->selected_year,
+          'selected_type_value' => $request->selected_type_value,
+          'last_update' => $last_update_date,
+          'user_resource_types' => $user_resource_types
+        ]);
+      }
+    } else {
+      abort(404);
     }
+  }
+
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function update(Request $request)
+  {
+    switch ($request->func) {
+      case "total":
+        UiReserfs::where('id', $request->id)->update(['user_id' => auth()->id(), 'is_approve' => false, 'total' => $request->param]);
+        break;
+      case 'surface_water':
+        UiReserfs::where('id', $request->id)->update(['user_id' => auth()->id(), 'is_approve' => false, 'surface_water' => $request->param]);
+        break;
+      case 'ex_reserf':
+        UiReserfs::where('id', $request->id)->update(['user_id' => auth()->id(), 'is_approve' => false, 'ex_reserf' => $request->param]);
+        break;
+    }
+
+    return response()->noContent();
+  }
+
+  public function accept(Request $request)
+  {
+    if (auth()->user()->org_name == 'gidrogeologiya') {
+      UiReserfs::where('years', $request->get('year'))->update(['user_id' => auth()->id(), 'is_approve' => true]);
+    }
+
+    return redirect()->back();
+  }
 }

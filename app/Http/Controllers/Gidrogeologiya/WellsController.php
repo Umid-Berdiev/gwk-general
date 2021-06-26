@@ -10,7 +10,7 @@ use App\Gidrogeologiya\WellsAttr;
 use App\Gidrogeologiya\WellsType;
 use App\Imports\Gidrogeologiya\WellsImport;
 use App\UzDistricts;
-use App\UzRegions;
+use App\UzRegion;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -47,7 +47,7 @@ class WellsController extends Controller
 
     $year = Carbon::now()->year;
     $well_types = WellsType::where('isDeleted', false)->get();
-    $uz_regions = UzRegions::all();
+    $uz_regions = UzRegion::all();
     $uz_districts = UzDistricts::all();
     $intendeds = Intended::where('isDeleted', false)->get();
     $bp = PlaceBirth::where('isDeleted', false)->get();
@@ -351,7 +351,7 @@ class WellsController extends Controller
       $wells = $wells->with('wells_attr', 'pv_field', 'users')->paginate($request->session()->get('perPage') ?? 20);
       $year = Carbon::now()->year;
       $well_types = WellsType::where('isDeleted', false)->get();
-      $uz_regions = UzRegions::all();
+      $uz_regions = UzRegion::all();
       $uz_districts = UzDistricts::all();
       $intendeds = Intended::where('isDeleted', false)->get();
       $bp = PlaceBirth::where('isDeleted', false)->get();
@@ -371,7 +371,7 @@ class WellsController extends Controller
     }
   }
 
-  public function Accept(Request $request)
+  public function accept(Request $request)
   {
     if (Auth::user()->hasRole('Administrator')) {
 
