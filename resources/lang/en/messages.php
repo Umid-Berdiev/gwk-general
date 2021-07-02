@@ -101,5 +101,10 @@
 		"close" => "Close",
 		"save" => "Save",
 		"choose" => "Select",
+		"Gidromet" => "Gidromet",
+		"Minvodxoz" => "Minvodxoz",
+		"Gidrogeologiya" => "Gidrogeologiya",
+		"Фильтр" => "Filter",
+		"search" => "Search",
 	];
 ?>

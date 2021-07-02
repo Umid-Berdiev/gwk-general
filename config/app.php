@@ -242,6 +242,10 @@ return [
   'gidrogeologiyaApiReport6' => 'http://waterbase.uz/api/place-birth',
   'gidrogeologiyaApiReport7' => 'http://waterbase.uz/api/wells',
 
+  'gidrogeologiyaApi' => 'http://gidrogeologiya/api',
+  'gidrometApi' => 'http://gidromet/api',
+  'minvodxozApi' => 'http://minvodxoz/api',
+
   'gidrometApiKey' => 'gidrometp2lbgWkFrykA4QyUmpHihzmc5BNzIABqapi',
   'minvodxozApiKey' => 'minvodxozp2lbgWkFrykA4QyUmpHihzmc5BNzIABqapi',
   'gidrogeologiyaApiKey' => 'gidrogeologiyap2lbgWkFrykA4QyUmpHihzmc5BNzIABqapi',

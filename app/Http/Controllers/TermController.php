@@ -11,10 +11,11 @@ class TermController extends Controller
   public function index()
   {
     $terms = [];
+    $search_terms = "";
 
     if (request()->search) {
-      // dd(request()->search);
-      $terms = $this->search(request()->search);
+      $search_terms = request()->search;
+      $terms = $this->search($search_terms);
       if (count($terms) == 0) return back()->with('warning', 'Данные не найдены!');
     } else {
       $terms = Term::where("metkis.language_id", 1)
@@ -26,6 +27,7 @@ class TermController extends Controller
 
     return view('admin.terms.index', [
       'table' => $terms,
+      'search_term' => $search_terms
     ]);
   }
 

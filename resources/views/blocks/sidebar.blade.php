@@ -12,7 +12,7 @@
         <i class="float-right bi" :class="{ 'bi-chevron-down' : !isShown1, 'bi-chevron-up' : isShown1 }"></i>
       </a>
 
-      <div v-show="isShown1" id="collapseOne" class="navbar-collapse">
+      <div v-show="isShown1" class="navbar-collapse">
         <nav class="navbar-nav flex-column pl-4">
           <a href="{{route('resource')}}"
             class="nav-link {{ starts_with(Route::current()->uri, 'resources') ? 'active' : '' }}">{{ __("messages.Resources") }}</a>
@@ -27,7 +27,7 @@
         <i class="float-right bi" :class="{ 'bi-chevron-down' : !isShown2, 'bi-chevron-up' : isShown2 }"></i>
       </a>
 
-      <div v-show="isShown2" id="collapseTwo" class="navbar-collapse">
+      <div v-show="isShown2" class="navbar-collapse">
         <nav class="navbar-nav flex-column pl-4">
           <a href="{{ route('directories.list_posts') }}"
             class="nav-link {{ url()->current() == route('directories.list_posts') ? 'active' : '' }}">
@@ -54,8 +54,8 @@
       <a class="nav-link" :class="{'active' : langs}" @click="persist('langs')"
         type="button">{{ __('messages.translations') }}
         <i class="float-right bi" :class="{ 'bi-chevron-down' : !langs, 'bi-chevron-up' : langs }"></i></a>
-      <div v-show="langs" class="navbar-collapse w-100">
-        <nav class="navbar-nav flex-column pl-2">
+      <div v-show="langs" class="navbar-collapse">
+        <nav class="navbar-nav flex-column pl-4">
           <a class="nav-link {{ starts_with(Route::current()->uri, 'admin/languages') ? 'active' : '' }}"
             href="{{ route('languages.index') }}">{{ __("messages.langs") }}</a>
           <a class="nav-link {{ starts_with(Route::current()->uri, 'admin/terms') ? 'active' : '' }}"

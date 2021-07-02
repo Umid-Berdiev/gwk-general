@@ -1,7 +1,7 @@
 <div id="header" class="bg-primary">
   <div class="row align-items-center py-2">
     <div style="cursor: pointer" onclick="window.location.href='{{route('dashboard')}}'" class="text-white col-auto">
-      <h3 class="font-weight-bold">{{ __("messages.Unified Water Cadastre") }}</h3>
+      <h3>{{ __("messages.Unified Water Cadastre") }}</h3>
       <p>{{ __("messages.Common base") }}</p>
     </div>
     <div class="col-auto px-1 ml-auto">

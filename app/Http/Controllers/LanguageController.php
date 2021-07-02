@@ -55,11 +55,6 @@ class LanguageController extends Controller
 
   public function setLang(Request $request)
   {
-    // $user = auth()->user();
-    // session()->put('locale', $request->lang);
-    // $user->update(['lang_prefix' => $request->lang]);
-
-    // return back();
     if (Language::where('language_prefix', $request->lang)->first()) {
       request()->session()->put('locale', $request->lang);
     }

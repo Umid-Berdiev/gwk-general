@@ -15,34 +15,3 @@
   </div>
 </div>
 @endsection
-
-{{-- @push('scripts')
-<script>
-  let resource = new Vue({
-    el: '#resource',
-    data: {
-      options: null,
-      year: (new Date()).getFullYear(),
-    },
-    mounted() {
-      this.options = @if(isset($id)) $id @else null @endif;
-    },
-    methods: {
-      changes(func, param, ids) {
-        axios.post("{{ route('resource.resource_regions.update') }}", {
-func: func,
-param: param,
-ids: ids,
-_token: "{{ csrf_token() }}",
-})
-.then(function (response) {
-console.log(response);
-})
-.catch(function (error) {
-console.log(error);
-});
-}
-}
-})
-</script>
-@endpush --}}

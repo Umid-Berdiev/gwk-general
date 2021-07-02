@@ -10,10 +10,6 @@ class MapController extends Controller
 {
   public function index()
   {
-    $uz_regions = UzRegion::all();
-
-    return view('general.pages.map.map', [
-      'uz_regions' => $uz_regions
-    ]);
+    return view('general.pages.map.index');
   }
 }

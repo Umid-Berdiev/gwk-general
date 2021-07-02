@@ -1,6 +1,6 @@
 @extends('layouts.master')
-@section('content')
 
+@section('content')
 <div class="container-fluid pt-3">
   <div class="row mb-3">
     <div class="col-auto">
@@ -27,14 +27,14 @@
           <form id="searchForm" method="get">
             <td></td>
             <td>
-              <input type="text" name="search" value="{{ request()->search1 ?? '' }}"
-                class="form-control form-control-sm" placeholder="{{ __('messages.Поиск') }}...">
+              <input type="text" name="search" value="{{ $search_term ?? '' }}" class="form-control form-control-sm"
+                placeholder="{{ __('messages.search') }}...">
             </td>
             <td></td>
             <td></td>
             <td></td>
             <td>
-              <button class="btn btn-sm btn-outline-info" type="submit">Поиск</button>
+              <button class="btn btn-sm btn-outline-info" type="submit">{{ __('messages.search') }}</button>
             </td>
           </form>
         </tr>
