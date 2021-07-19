@@ -249,4 +249,6 @@ return [
   'gidrometApiKey' => 'gidrometp2lbgWkFrykA4QyUmpHihzmc5BNzIABqapi',
   'minvodxozApiKey' => 'minvodxozp2lbgWkFrykA4QyUmpHihzmc5BNzIABqapi',
   'gidrogeologiyaApiKey' => 'gidrogeologiyap2lbgWkFrykA4QyUmpHihzmc5BNzIABqapi',
+
+  "API_KEY" => "generalp2lbgWkFrykA4QyUmpHihzmc5BNzIABqapi",
 ];

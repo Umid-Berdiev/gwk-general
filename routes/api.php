@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\GidrometApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,5 +16,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+  return $request->user();
+});
+
+Route::group(['middleware' => ['api_token']], function () {
+  //Оператив Амударё
+  Route::get('oper-amu', [GidrometApiController::class, 'operAmu']);
+  //Оператив Сирдарё
+  Route::get('oper-sird', [GidrometApiController::class, 'operSird']);
+  //Режим гидропоста
+  Route::get('hydropost-mode', [GidrometApiController::class, 'hydropostMode']);
 });
