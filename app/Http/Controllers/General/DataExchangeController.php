@@ -579,7 +579,7 @@ class DataExchangeController extends Controller
           'api_token' => config('app.gidrometApiKey'),
           'month' => $selected_date,
         ])
-        ->post();
+        ->get();
       $response = json_decode($response, true);
       // dd($response);
 
@@ -588,6 +588,7 @@ class DataExchangeController extends Controller
         Information::setOperAmuDatas($response['data'], $r_year, $r_month);
         $formObjects = $response['data']['formObjects'];
         $objectId = [];
+
         foreach ($formObjects as $object) {
           $objectId[] = $object['gvk_object_id'];
         }
@@ -629,7 +630,7 @@ class DataExchangeController extends Controller
           'api_token' => config('app.gidrometApiKey'),
           'month' => $selected_date,
         ])
-        ->post();
+        ->get();
       $response = json_decode($response, true);
 
       if ($response && $response['success']) {
@@ -678,7 +679,7 @@ class DataExchangeController extends Controller
           'api_token' => config('app.gidrometApiKey'),
           'year' => $selected_date,
         ])
-        ->post();
+        ->get();
       $response = json_decode($response, true);
       //dd($response);
 

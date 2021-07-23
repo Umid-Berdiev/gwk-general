@@ -26,4 +26,6 @@ Route::group(['middleware' => ['api_token']], function () {
   Route::get('oper-sird', [GidrometApiController::class, 'operSird']);
   //Режим гидропоста
   Route::get('hydropost-mode', [GidrometApiController::class, 'hydropostMode']);
+
+  Route::get('instance-element-data', [GidrometApiController::class, 'getInstanceElementData']);
 });

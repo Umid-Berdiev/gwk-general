@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GidrometApiController extends Controller
 {
@@ -119,5 +120,97 @@ class GidrometApiController extends Controller
 
     return $this->sendResponse($data, 'Режим гидропоста');
     //return $this->sendResponse(\DB::connection()->getDatabaseName(), 'Режим гидропоста');
+  }
+
+  protected function getInstanceElementData(Request $request)
+  {
+    // return $request->all();
+    $selected_date = $request->selected_date;
+    $selected_element = $request->selected_element;
+
+    $r_year = date('Y', strtotime($selected_date));
+    $r_month = date('n', strtotime($selected_date));
+    $r_days_in_month = date('t', strtotime($selected_date)); // shu oyda necha kun borligi
+
+
+    // 1) Оператив Амударё
+    if ($selected_element == "operativeAmu") {
+      $result = [];
+      $objectId = [];
+
+      $formObjects = DB::table('oper_amu_forms')->where('year', $r_year)->where('check', 1)->orderBy('order_number')->join('gvk_objects', 'oper_amu_forms.gvk_object_id', '=', 'gvk_objects.id')->get();
+      // return $formObjects;
+      // return response()->json($formObjects);
+
+      foreach ($formObjects as $object) {
+        $objectId[] = $object->gvk_object_id;
+      }
+      // return $objectId;
+
+      $allDatas = DB::table('information')->whereIn('gvk_object_id', $objectId)
+        ->whereYear('date', $r_year)
+        ->whereMonth('date', $r_month)
+        // ->orderByRaw("updated_at DESC, date ASC")
+        ->join('gvk_objects', 'information.gvk_object_id', '=', 'gvk_objects.id')
+        ->get();
+
+      $data = [
+        'result' => $allDatas,
+        'formObjects' => $formObjects,
+      ];
+
+      return $this->sendResponse($data, 'Оператив Амударё');
+    }
+
+    // 2) Оператив Сирдарё
+    if ($selected_element == "operativeSird") {
+      $result = [];
+      $objectId = [];
+
+      $formObjects = DB::table('oper_sird_forms')->where('year', $r_year)->where('check', 1)->orderBy('order_number')->join('gvk_objects', 'oper_sird_forms.gvk_object_id', '=', 'gvk_objects.id')->get();
+      // return $formObjects;
+      // return response()->json($formObjects);
+
+      foreach ($formObjects as $object) {
+        $objectId[] = $object->gvk_object_id;
+      }
+      // return $objectId;
+
+      $allDatas = DB::table('information')->whereIn('gvk_object_id', $objectId)
+        ->whereYear('date', $r_year)
+        ->whereMonth('date', $r_month)
+        // ->orderByRaw("updated_at DESC, date ASC")
+        ->join('gvk_objects', 'information.gvk_object_id', '=', 'gvk_objects.id')
+        ->get();
+
+      $data = [
+        'result' => $allDatas,
+        'formObjects' => $formObjects,
+      ];
+
+      return $this->sendResponse($data, 'Оператив Сирдарё');
+    }
+
+    // 3) Режим гидропоста
+    if ($selected_element == "rejimGidro") {
+      $objectId = [];
+
+      $allDatas = DB::table('rejim_gidropost')
+        ->where('year', $selected_date)
+        ->join('stations', 'rejim_gidropost.station_id', '=', 'stations.id')
+        ->join('gidromet_parameters', 'rejim_gidropost.parameter_id', '=', 'gidromet_parameters.id')
+        ->select('rejim_gidropost.*', 'stations.station_name', 'gidromet_parameters.param_name')
+        ->get();
+
+      // return $allDatas;
+
+      $data = [
+        'formObjects' => $allDatas
+      ];
+
+      return $this->sendResponse($data, 'Режим Гидропост');
+    }
+
+    return back()->with('warning', 'Not Found!');
   }
 }
