@@ -39,7 +39,7 @@
               <td>{{ $data['number_auther'] }}</td>
               <td>{{ $data['cadaster_number'] }}</td>
               <td>{{ $data['mineralization'] }}</td>
-              <td>{{ $data['type_name'] }}</td>
+              <td>{{ $data['well_type']['name'] }}</td>
               <td>{{ $data['year'] }}</td>
             </tr>
             @endforeach

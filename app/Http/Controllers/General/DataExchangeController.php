@@ -540,21 +540,21 @@ class DataExchangeController extends Controller
     // dd($request->all());
     if ($request->instance == 'gidromet') {
       return [
-        "Operative Amu",
-        "Operative Sird",
-        "Rejim Gidro"
+        trans("messages.Operative Amu"),
+        trans("messages.Operative Sird"),
+        trans("messages.Rejim Gidro")
       ];
     }
     if ($request->instance == 'minvodxoz') {
       return [
-        "Every Day Datas",
-        "Volume month reservoir"
+        trans("messages.Every Day Datas"),
+        trans("messages.Volume month reservoir")
       ];
     }
     if ($request->instance == 'gidrogeologiya') {
       return [
-        "Place birth",
-        "Well"
+        trans("messages.Place birth"),
+        trans("messages.Well")
       ];
     } else return [];
   }
@@ -572,16 +572,15 @@ class DataExchangeController extends Controller
     $r_days_in_month = date('t', strtotime($selected_date)); // shu oyda necha kun borligi
 
     // 1) Оператив Амударё
-    if ($selected_element == "Operative Amu") {
+    if ($selected_element == trans("messages.Operative Amu")) {
 
       $response = Curl::to(config('app.gidrometApiReport1'))
         ->withData([
           'api_token' => config('app.gidrometApiKey'),
           'month' => $selected_date,
         ])
-        ->get();
-      $response = json_decode($response, true);
-      // dd($response);
+        ->post();
+      $response = json_decode($response, true);     
 
       if ($response && $response['success']) {
 
@@ -623,14 +622,14 @@ class DataExchangeController extends Controller
     }
 
     // 2) Оператив Сирдарё
-    if ($selected_element == "Operative Sird") {
+    if ($selected_element == trans("messages.Operative Sird")) {
 
       $response = Curl::to(config('app.gidrometApiReport2'))
         ->withData([
           'api_token' => config('app.gidrometApiKey'),
           'month' => $selected_date,
         ])
-        ->get();
+        ->post();
       $response = json_decode($response, true);
 
       if ($response && $response['success']) {
@@ -673,18 +672,18 @@ class DataExchangeController extends Controller
     }
 
     // 3) Режим гидропоста
-    if ($selected_element == "Rejim Gidro") {
+    if ($selected_element == trans("messages.Rejim Gidro")) {
       $response = Curl::to(config('app.gidrometApiReport3'))
         ->withData([
           'api_token' => config('app.gidrometApiKey'),
-          'year' => $selected_date,
+          'year' => $r_year,
         ])
-        ->get();
+        ->post();
+        //dd($response);
       $response = json_decode($response, true);
-      //dd($response);
 
       if ($response['success']) {
-        RejimGidropost::setDatas($response['data'], $selected_date);
+        RejimGidropost::setDatas($response['data'], $r_year);
         $allDatas = $response['data'];
 
         // dd($selected_element);
@@ -700,7 +699,7 @@ class DataExchangeController extends Controller
     }
 
     // 4) Ежедневные
-    if ($selected_element == "Every Day Datas") {
+    if ($selected_element == trans("messages.Every Day Datas")) {
 
       $response = Curl::to(config('app.minvodxozApiReport4'))
         ->withData([
@@ -711,14 +710,16 @@ class DataExchangeController extends Controller
       $response = json_decode($response, true);
 
       if ($response['success']) {
+        //dd($response);
 
         Information::setDatas($response['data'], $r_year, $r_month);
         $allDatas = $response['data'];
+        $firstData = null;
         $day = date('d_m_Y', strtotime($selected_date . '-01'));
         if (!empty($allDatas)) {
           $firstData = $allDatas[$day];
         }
-        // dd($firstData);
+         //dd($firstData);
 
         return view('general.data-exchange.daily', compact(
           'instances',
@@ -734,7 +735,7 @@ class DataExchangeController extends Controller
     }
 
     // 5) Объемы в/х месячные
-    if ($selected_element == "Volume month reservoir") {
+    if ($selected_element == trans("messages.Volume month reservoir")) {
 
       $response = Curl::to(config('app.minvodxozApiReport5'))
         ->withData([
@@ -762,16 +763,16 @@ class DataExchangeController extends Controller
     }
 
     // 6) Место рождение
-    if ($selected_element == "Place birth") {
+    if ($selected_element == trans("messages.Place birth")) {
 
       $response = Curl::to(config('app.gidrogeologiyaApiReport6'))
         ->withData([
           'api_token' => config('app.gidrogeologiyaApiKey'),
           'year' => $r_year,
         ])
-        ->post();
-      // dd($response);
+        ->get();
       $response = json_decode($response, true);
+       //dd($response['data']);
 
       if ($response && $response['success']) {
         GidrogeologiyaPlaceBirth::setDatas($response['data'], $r_year);
@@ -790,14 +791,14 @@ class DataExchangeController extends Controller
     }
 
     // 7) Скважина
-    if ($selected_element == "Well") {
+    if ($selected_element == trans("messages.Well")) {
 
       $response = Curl::to(config('app.gidrogeologiyaApiReport7'))
         ->withData([
           'api_token' => config('app.gidrogeologiyaApiKey'),
           'year' => $r_year,
         ])
-        ->post();
+        ->get();
       $response = json_decode($response, true);
 
       if ($response && $response['success']) {

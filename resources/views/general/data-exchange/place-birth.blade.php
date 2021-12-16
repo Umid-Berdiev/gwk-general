@@ -35,13 +35,13 @@
               <tr>
                 <td>
                   <input type="checkbox" name="object[]" class="gr-obj-class" data-status="0"
-                    data-name="{{ $data['name'] }}" value="{{ $data['name'] }}">
+                    data-name="{{ $data['properties']['name'] }}" value="{{ $data['properties']['name'] }}">
                 </td>
-                <td>{{ $data['name'] }}</td>
-                <td>{{ $data['code'] }}</td>
-                <td>{{ $data['groundwater_resource'] }}</td>
-                <td>{{ $data['selection_from_approved_groundwater_reserves'] }}</td>
-                <td>{{ $data['year'] }}</td>
+                <td>{{ $data['properties']['name'] }}</td>
+                <td>{{ $data['properties']['code'] }}</td>
+                <td>{{ $data['properties']['groundwater_resource'] }}</td>
+                <td>{{ $data['properties']['selection_from_approved_groundwater_reserves'] }}</td>
+                <td>{{ $data['properties']['year'] }}</td>
               </tr>
               @endforeach
             </tbody>

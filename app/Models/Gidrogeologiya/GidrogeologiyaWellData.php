@@ -30,7 +30,7 @@ class GidrogeologiyaWellData extends Model
 
     		$model->year = $year;
     		$model->wells_type_id = $data['wells_type_id'];
-            $model->type_name = $data['type_name'];
+            $model->type_name = $data['well_type']['name'];
     		$model->number_auther = $data['number_auther'];
     		$model->cadaster_number = $data['cadaster_number'];
     		$model->mineralization = (float)$data['mineralization'];

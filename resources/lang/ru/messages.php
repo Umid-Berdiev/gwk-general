@@ -138,5 +138,16 @@
     'Volume month reservoir'=>'Объемы в/х месячные',
     'Place birth'=>'Место рождение',
     'Well'=>'Скважина',
-    'Adding form'=>'Форма добавления'
+    'Adding form'=>'Форма добавления',
+    'wells' => 'Скважины',
+    'groundwaters' => 'Месторождение подземных вод',
+    'pumpstations' => 'Насосная станция',
+    'waterworks' => 'Гидроузел',
+    'stations' => 'Станция',
+    'select_form' => 'Выберите форму',
+    'SURFACE AND UNDERGROUND WATER RESOURCES AND THEIR USE' => 'ПОВЕРХНОСТНЫЕ И ПОДЗЕМНЫЕ ВОДНЫЕ РЕСУРСЫ И ИХ ИСПОЛЬЗОВАНИЕ',
+    'Post list' => 'Список постов на реках и каналах',
+    'Chemistry list' => 'Список химического состава',
+    'To shape' => 'Формировать',
+
 	];

@@ -18,21 +18,21 @@ class GidrogeologiyaPlaceBirth extends Model
         $oldDatas = GidrogeologiyaPlaceBirth::where('year', $year)->get();
 
     	foreach ($datas as $data) {
-
+            //dd($data);
             $model = $oldDatas->filter(function ($item) use ($year, $data) {
                 return $item->year == $year && 
-                    $item->code == $data['code'] && 
-                    $item->name == $data['name'];
+                    $item->code == $data['properties']['code'] && 
+                    $item->name == $data['properties']['name'];
             })->first();
 
     		if($model == null) $model = new GidrogeologiyaPlaceBirth();
 
-    		$model->code = $data['code'];
-            $model->name = $data['name'];
+    		$model->code = $data['properties']['code'];
+            $model->name = $data['properties']['name'];
     		$model->year = $year;
-    		$model->groundwater_resource = (float)$data['groundwater_resource'];
-            $model->selection_from_approved_groundwater_reserves = (float)$data['selection_from_approved_groundwater_reserves'];
-    		$model->favcolor = $data['favcolor'];
+    		$model->groundwater_resource = (float)$data['properties']['groundwater_resource'];
+            $model->selection_from_approved_groundwater_reserves = (float)$data['properties']['selection_from_approved_groundwater_reserves'];
+    		$model->favcolor = $data['properties']['favcolor'];
     		$model->save();
         }
     }
