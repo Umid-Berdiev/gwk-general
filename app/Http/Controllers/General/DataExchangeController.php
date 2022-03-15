@@ -580,7 +580,7 @@ class DataExchangeController extends Controller
           'month' => $selected_date,
         ])
         ->post();
-      $response = json_decode($response, true);     
+      $response = json_decode($response, true);
 
       if ($response && $response['success']) {
 
@@ -679,7 +679,7 @@ class DataExchangeController extends Controller
           'year' => $r_year,
         ])
         ->post();
-        //dd($response);
+      //dd($response);
       $response = json_decode($response, true);
 
       if ($response['success']) {
@@ -719,7 +719,7 @@ class DataExchangeController extends Controller
         if (!empty($allDatas)) {
           $firstData = $allDatas[$day];
         }
-         //dd($firstData);
+        //dd($firstData);
 
         return view('general.data-exchange.daily', compact(
           'instances',
@@ -765,17 +765,17 @@ class DataExchangeController extends Controller
     // 6) Место рождение
     if ($selected_element == trans("messages.Place birth")) {
 
-      $response = Curl::to(config('app.gidrogeologiyaApiReport6'))
+      $response = Curl::to(config('app.gidrogeologiyaApi') . "/placebirth")
         ->withData([
           'api_token' => config('app.gidrogeologiyaApiKey'),
-          'year' => $r_year,
+          'year' => $selected_date,
         ])
         ->get();
       $response = json_decode($response, true);
-       //dd($response['data']);
+      //dd($response['data']);
 
       if ($response && $response['success']) {
-        GidrogeologiyaPlaceBirth::setDatas($response['data'], $r_year);
+        GidrogeologiyaPlaceBirth::setDatas($response['data'], $selected_date);
         $allDatas = $response['data'];
 
         return view('general.data-exchange.place-birth', compact(
@@ -783,9 +783,7 @@ class DataExchangeController extends Controller
           'selected_instance',
           'selected_element',
           'selected_date',
-          'allDatas',
-          'r_month',
-          'r_year'
+          'allDatas'
         ));
       }
     }
@@ -793,16 +791,17 @@ class DataExchangeController extends Controller
     // 7) Скважина
     if ($selected_element == trans("messages.Well")) {
 
-      $response = Curl::to(config('app.gidrogeologiyaApiReport7'))
+      $response = Curl::to(config('app.gidrogeologiyaApi') . "/wells")
         ->withData([
           'api_token' => config('app.gidrogeologiyaApiKey'),
-          'year' => $r_year,
+          'year' => $selected_date,
         ])
         ->get();
       $response = json_decode($response, true);
+      // dd($response);
 
       if ($response && $response['success']) {
-        GidrogeologiyaWellData::setDatas($response['data'], $r_year);
+        GidrogeologiyaWellData::setDatas($response['data'], $selected_date);
         $allDatas = $response['data'];
 
         return view('general.data-exchange.well-data', compact(
@@ -810,9 +809,7 @@ class DataExchangeController extends Controller
           'selected_instance',
           'selected_element',
           'selected_date',
-          'allDatas',
-          'r_month',
-          'r_year'
+          'allDatas'
         ));
       }
     }

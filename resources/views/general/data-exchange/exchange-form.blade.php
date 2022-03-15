@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-3">
       <select required class="form-control form-control-sm form_class text-capitalize"
-        @change="getInstanceElements($event.target.value)" name="selected_instance">
+        @change="getInstanceElements($event.target.value)" name="selected_instance" v-model="selectedInstance">
         <option selected hidden>{{ __('messages.Select') }}</option>
         @foreach($instances as $value)
         <option value="{{ $value }}" @if(isset($selected_instance) && $selected_instance==$value) selected @endif>
@@ -23,9 +23,9 @@
     </div>
 
     <div class="col-2">
-      <input v-if="selectedElement == 'Rejim Gidro'" required type="number" min="1900" max="{{ date('Y') }}"
-        value="{{ isset($selected_date) ? $selected_date : date('Y') }}" name="selected_date"
-        class="form-control form-control-sm" placeholder="{{ __('messages.Year') }}" required>
+      <input v-if="selectedElement == 'Rejim Gidro' || selectedInstance === 'gidrogeologiya'" required type="number"
+        min="1900" max="{{ date('Y') }}" value="{{ isset($selected_date) ? $selected_date : date('Y') }}"
+        name="selected_date" class="form-control form-control-sm" placeholder="{{ __('messages.Year') }}" required>
       <input v-else required type="month" name="selected_date" class="form-control form-control-sm"
         @isset($selected_date) value={{ $selected_date }} @endisset>
     </div>
@@ -46,11 +46,10 @@
     data() {
       return {
         instanceElements: [],
-        selectedDate: null,
-        selectedElement: ""
+        selectedInstance: "",
+        selectedElement: "",
+        selectedDate: null
       }
-    },
-    computed: {
     },
     methods: {
       async getInstanceElements(instance) {
@@ -61,9 +60,10 @@
       }
     },
     mounted() {
-      this.selectedDate = @if(isset($selected_date)) @json($selected_date) @else null @endif;
+      this.selectedDate = @if(isset($selected_date)) @json((int) $selected_date) @else null @endif;
       const selectedInstance = @if(isset($selected_instance)) @json($selected_instance) @else null @endif;
       if (!_.isEmpty(selectedInstance)) {
+        this.selectedInstance = selectedInstance;
         this.getInstanceElements(selectedInstance);
       }
       this.selectedElement = @if(isset($selected_element)) @json($selected_element) @else "" @endif;

@@ -229,7 +229,8 @@ return [
     'URL' => Illuminate\Support\Facades\URL::class,
     'Validator' => Illuminate\Support\Facades\Validator::class,
     'View' => Illuminate\Support\Facades\View::class,
-    'Debugbar' => Barryvdh\Debugbar\Facade::class,
+    'Debugbar' => \Barryvdh\Debugbar\Facades\Debugbar::class,
+    // 'Debugbar' => Barryvdh\Debugbar\Facade::class,
     'Curl' => Ixudra\Curl\Facades\Curl::class,
 
   ],
@@ -239,10 +240,10 @@ return [
   'gidrometApiReport3' => 'http://gidromet/api/hydropost-mode',
   'minvodxozApiReport4' => 'http://195.158.30.163:1880/api/daily',
   'minvodxozApiReport5' => 'http://195.158.30.163:1880/api/reservoir-monthly',
-  'gidrogeologiyaApiReport6' => 'http://waterbase.uz/api/place-birth',
-  'gidrogeologiyaApiReport7' => 'http://waterbase.uz/api/wells',
+  'gidrogeologiyaApiReport6' => 'http://gidrogeologiya/api/placebirth',
+  'gidrogeologiyaApiReport7' => 'http://gidrogeologiya/api/wells',
 
-  'gidrogeologiyaApi' => 'http://waterbase.uz/api',
+  'gidrogeologiyaApi' => env('GG_API_URL', 'http://waterbase.uz/api'),
   'gidrometApi' => 'http://gidromet/api',
   'minvodxozApi' => 'http://213.230.126.118:8080/api',
 
