@@ -21,7 +21,7 @@ class CharacteristicsWatersController extends Controller
     $user_resource_types = getUserResourceTypes();
     $selected_year = $request->selected_year;
 
-    if (auth()->user()->org_name == 'gidromet' || auth()->user()->org_name == 'other') {
+//    if (auth()->user()->org_name == 'gidromet' || auth()->user()->org_name == 'other') {
       $posts_lists = ListPosts::where('isDelete', false)->get();
       $chemicals = Chemicals::where('isDelete', false)->get();
       $last_update_date = CharacteristicsWaters::select('updated_at', 'user_id', 'is_approve', 'years')->where('years', $selected_year)->orderBy('updated_at', 'DESC')->first();
@@ -39,15 +39,15 @@ class CharacteristicsWatersController extends Controller
         'user_resource_types' => $user_resource_types,
         'last_update' => $last_update_date
       ]);
-    } else {
-      return abort(404);
-    }
+//    } else {
+//      return abort(404);
+//    }
   }
 
   /**
    * Store a newly created resource in storage.
    *
-   * @param  \Illuminate\Http\Request  $request
+   * @param \Illuminate\Http\Request $request
    * @return \Illuminate\Http\Response
    */
   public function store(Request $request)

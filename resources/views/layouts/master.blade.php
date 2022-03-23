@@ -4,6 +4,7 @@
 
 <head>
   <!-- Required meta tags -->
+  <title>{{ config('app.appName') }}</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -56,13 +57,6 @@
   <script src="{{ asset('js/main.js') }}"></script>
   <script src="{{ asset('js/vue.js') }}"></script>
 
-  <!-- Inputmask JS -->
-  {{-- <script src="{{ asset('js/inputmask.min.js') }}"></script> --}}
-
-  {{-- <script>
-    $(":input").inputmask();
-    bsCustomFileInput.init();
-  </script> --}}
   @stack('scripts')
 </body>
 

@@ -66,7 +66,7 @@ class ApprovalPlotController extends Controller
   /**
    * Store a newly created resource in storage.
    *
-   * @param  \Illuminate\Http\Request  $request
+   * @param \Illuminate\Http\Request $request
    * @return \Illuminate\Http\Response
    */
   public function store(Request $request)
@@ -140,7 +140,7 @@ class ApprovalPlotController extends Controller
   /**
    * Display the specified resource.
    *
-   * @param  int  $id
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function show($id)
@@ -151,7 +151,7 @@ class ApprovalPlotController extends Controller
   /**
    * Show the form for editing the specified resource.
    *
-   * @param  int  $id
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function edit(Request $request)
@@ -172,8 +172,8 @@ class ApprovalPlotController extends Controller
   /**
    * Update the specified resource in storage.
    *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
+   * @param \Illuminate\Http\Request $request
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function update(Request $request)
@@ -251,7 +251,7 @@ class ApprovalPlotController extends Controller
   /**
    * Remove the specified resource from storage.
    *
-   * @param  int  $id
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function destroy($id)
@@ -310,18 +310,17 @@ class ApprovalPlotController extends Controller
           }
           if ($key == 'user') {
             $data = $data->whereHas('users', function ($query) {
-              $query->where('email', 'ilike',  '%' . request()->user . '%');
+              $query->where('email', 'ilike', '%' . request()->user . '%');
             });
           }
           if ($key == 'page') {
           }
-          if ($key != 'user' && $key != 'page' && $key != 'district' && $key != 'birth_place' && $key != 'region' &&  $key != 'is_approve') {
+          if ($key != 'user' && $key != 'page' && $key != 'district' && $key != 'birth_place' && $key != 'region' && $key != 'is_approve') {
             $data = $data->where($key, "ilike", "%" . $value . "%");
           }
         }
       }
     } else return redirect(route('gg.reestr.ap.index'));
-
 
 
     $ap = $data->with('ap_attr', 'type_water_uses', 'birth_place')->paginate($request->session()->get('perPage') ?? 10);

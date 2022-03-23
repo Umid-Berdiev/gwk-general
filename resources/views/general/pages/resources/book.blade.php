@@ -28,9 +28,7 @@
               <button type="submit" class="btn btn-sm btn-primary">
                 <i class="fas fa-glass-martini-alt"></i> {{ __('messages.To shape') }}
               </button>
-              <button id="btn_export" class="btn btn-sm btn-success">
-                <i class="fas fa-download"></i> {{ __('messages.Export') }}
-              </button>
+              @include('general.pages.resources.export-form')
             </div>
           </div>
         </form>
@@ -38,12 +36,15 @@
     </div>
 
     <div id="export">
-      <h4 id="titleOfForm" class="ml-3 font-weight-bold text-primary text-uppercase">
-        {{ __('messages.SURFACE AND UNDERGROUND WATER RESOURCES AND THEIR USE') }}
-      </h4>
+
       <div class="table-responsive">
-        <table class="table table-striped small ">
+        <table class="table table-striped small" id="exportable_table">
           <thead class="text-center">
+          <tr>
+             <td colspan="9">
+               <h4 class="ml-3 font-weight-bold text-primary text-uppercase text-uppercase">{{ __('messages.SURFACE AND UNDERGROUND WATER RESOURCES AND THEIR USE') }}</h4>
+             </td>
+          </tr>
             <tr>
               <th scope="col" rowspan="2">{{ __('messages.Region') }}</th>
               <th scope="col" colspan="3">{{ __('messages.Long-term runoff') }}</th>
@@ -91,12 +92,17 @@
         </table>
       </div>
 
-      <h4 id="titleOfForm" class="ml-3 font-weight-bold text-primary text-uppercase text-uppercase">
-        {!! str_replace('{year}', $year, __('messages.Operational groundwater reserves as of year')) !!}
-      </h4>
+
       <div class="table-responsive">
-        <table class="table table-striped small ">
+        <table class="table table-striped small " id="exportable_table_2">
           <thead class="text-center">
+          <tr>
+            <td colspan="4">
+              <h4 id="titleOfForm" class="ml-3 font-weight-bold text-primary text-uppercase text-uppercase">
+                {!! str_replace('{year}', $year, __('messages.Operational groundwater reserves as of year')) !!}
+              </h4>
+            </td>
+          </tr>
             <tr>
               <th rowspan="2" scope="col">{{ __('messages.Region') }}</th>
               <th scope="col" colspan="2">{{ __('messages.Long-term runoff') }}</th>
@@ -120,12 +126,17 @@
         </table>
       </div>
 
-      <h4 id="titleOfForm" class="ml-3 font-weight-bold text-primary text-uppercase block">
-        {!! __('messages.Information on water withdrawals and discharges, km3 / year') !!}
-      </h4>
+
       <div class="table-responsive">
-        <table class="table table-striped small ">
+        <table class="table table-striped small" id="exportable_table_3">
           <thead class="text-center">
+          <tr>
+            <td colspan="6">
+              <h4 id="titleOfForm" class="ml-3 font-weight-bold text-primary text-uppercase block">
+                {!! __('messages.Information on water withdrawals and discharges, km3 / year') !!}
+              </h4>
+            </td>
+          </tr>
             <tr>
               <th rowspan="2" scope="col">{{ __('messages.Region') }}</th>
               <th scope="col" colspan="5">{{ __('messages.Water taken') }}</th>
@@ -160,12 +171,17 @@
           </tbody>
         </table>
       </div>
-      <h4 id="titleOfForm" class="ml-3 font-weight-bold text-primary text-uppercase">
-        {!! __('messages.River flow resources, km3 / year') !!}
-      </h4>
+
       <div class="table-responsive">
-        <table class="table table-striped small ">
+        <table class="table table-striped small" id="exportable_table_4">
           <thead class="text-center">
+          <tr>
+            <td colspan="8">
+              <h4 id="titleOfForm" class="ml-3 font-weight-bold text-primary text-uppercase">
+                {!! __('messages.River flow resources, km3 / year') !!}
+              </h4>
+            </td>
+          </tr>
             <tr>
               <th scope="col" rowspan="2">{{ __('messages.River') }}</th>
               <th scope="col" rowspan="2">{{ __('messages.Plot') }}</th>
@@ -199,12 +215,16 @@
         </table>
       </div>
 
-      <h4 id="titleOfForm" class="ml-3 font-weight-bold text-primary text-uppercase">
-        {!! str_replace('{year}', $year, __('messages.Groundwater resources km3 year')) !!}
-      </h4>
       <div class="table-responsive">
-        <table class="table table-striped small ">
+        <table class="table table-striped small" id="exportable_table_5">
           <thead class="text-center">
+          <tr>
+            <td colspan="5">
+              <h4 id="titleOfForm" class="ml-3 font-weight-bold text-primary text-uppercase">
+                {!! str_replace('{year}', $year, __('messages.Groundwater resources km3 year')) !!}
+              </h4>
+            </td>
+          </tr>
             <tr>
               <th scope="col" rowspan="3">{{ __('messages.Hydrogeological areas') }}</th>
               <th scope="col" rowspan="3">{{ __('messages.Natural resources') }}</th>
@@ -234,12 +254,17 @@
         </table>
       </div>
 
-      <h4 id="titleOfForm" class="ml-3 font-weight-bold text-primary text-uppercase">
-        {!! str_replace('{year}', $year, __('messages.groundwater use year')) !!}
-      </h4>
+
       <div class="table-responsive">
-        <table class="table table-striped small ">
+        <table class="table table-striped small" id="exportable_table_6">
           <thead class="text-center">
+          <tr>
+            <td colspan="3">
+              <h4 id="titleOfForm" class="ml-3 font-weight-bold text-primary text-uppercase">
+                {!! str_replace('{year}', $year, __('messages.groundwater use year')) !!}
+              </h4>
+            </td>
+          </tr>
             <tr>
               <th rowspan="2">{{ __('messages.Hydrogeological areas') }}</th>
               <th colspan="2">{{ __('messages.Water taken from underground sources') }}</th>
@@ -261,12 +286,17 @@
         </table>
       </div>
 
-      <h4 id="titleOfForm" class="ml-3 font-weight-bold text-primary text-uppercase">
-        {!! __('messages.water use for various needs in regions') !!}
-      </h4>
+
       <div class="table-responsive">
-        <table class="table table-striped small ">
+        <table class="table table-striped small" id="exportable_table_7">
           <thead class="text-center">
+          <tr>
+            <td colspan="10">
+              <h4 id="titleOfForm" class="ml-3 font-weight-bold text-primary text-uppercase">
+                {!! __('messages.water use for various needs in regions') !!}
+              </h4>
+            </td>
+          </tr>
             <tr>
               <th scope="col" rowspan="3">{{ __('messages.Region') }}</th>
               <th scope="col" colspan="3">{{ __('messages.Water taken') }}</th>
@@ -302,12 +332,17 @@
           </tbody>
         </table>
       </div>
-      <h4 id="titleOfForm" class="ml-3 font-weight-bold text-primary text-uppercase">
-        {{ __('messages.information about large canals') }}
-      </h4>
+
       <div class="table-responsive">
-        <table class="table table-striped small ">
+        <table class="table table-striped small" id="exportable_table_8">
           <thead class="text-center">
+          <tr>
+            <td colspan="6">
+              <h4 id="titleOfForm" class="ml-3 font-weight-bold text-primary text-uppercase">
+                {{ __('messages.information about large canals') }}
+              </h4>
+            </td>
+          </tr>
             <tr>
               <th scope="col">{{ __('messages.River') }}</th>
               <th scope="col">{{ __('messages.Distance from the river km') }}</th>
@@ -332,12 +367,17 @@
         </table>
       </div>
 
-      <h4 id="titleOfForm" class="ml-3 font-weight-bold text-primary text-uppercase">
-        {{ __('messages.Changes in water reserves and levels') }}
-      </h4>
+
       <div class="table-responsive">
-        <table class="table table-striped small ">
+        <table class="table table-striped small" id="exportable_table_9">
           <thead class="text-center">
+          <tr>
+            <td colspan="10">
+              <h4 id="titleOfForm" class="ml-3 font-weight-bold text-primary text-uppercase">
+                {{ __('messages.Changes in water reserves and levels') }}
+              </h4>
+            </td>
+          </tr>
             <tr>
               <th scope="col" rowspan="2">№</th>
               <th scope="col" rowspan="2">{{ __('messages.Reservoir') }}</th>
@@ -374,12 +414,17 @@
         </table>
       </div>
 
-      <h4 id="titleOfForm" class="ml-3 font-weight-bold text-primary text-uppercase">
-        {{ __('messages.Characteristics of the degree of pollution') }}
-      </h4>
+
       <div class="table-responsive">
-        <table class="table table-striped small ">
+        <table class="table table-striped small" id="exportable_table_10">
           <thead class="text-center">
+          <tr>
+            <td colspan="5">
+              <h4 id="titleOfForm" class="ml-3 font-weight-bold text-primary text-uppercase">
+                {{ __('messages.Characteristics of the degree of pollution') }}
+              </h4>
+            </td>
+          </tr>
             <tr>
               <th scope="col" rowspan="2">{{ __('messages.list of posts on rivers and canals') }}</th>
               <th scope="col" rowspan="2">{{ __('messages.Major pollutants') }}</th>

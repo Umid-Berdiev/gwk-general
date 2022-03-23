@@ -36,11 +36,11 @@
                 <input type="checkbox" name="object[]" class="gr-obj-class" data-status="0"
                   data-name="{{ $data['number_auther'] }}" value="{{ $data['number_auther'] }}">
               </td>
-              <td>{{ $data['number_auther'] }}</td>
-              <td>{{ $data['cadaster_number'] }}</td>
-              <td>{{ $data['mineralization'] }}</td>
-              <td>{{ $data['well_type']['name'] }}</td>
-              <td>{{ $data['year'] }}</td>
+              <td>{{ $data['number_auther'] ?? '' }}</td>
+              <td>{{ $data['cadaster_number'] ?? '' }}</td>
+              <td>{{ $data['mineralization'] ?? '' }}</td>
+              <td>{{ $data['well_type']['name'] ?? ($data['type_name'] ?? '') }}</td>
+              <td>{{ $data['year'] ?? '' }}</td>
             </tr>
             @endforeach
           </tbody>

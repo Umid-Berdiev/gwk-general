@@ -72,8 +72,7 @@ function getMonths()
 function getUserResourceTypes()
 {
   $user_resource_types = [];
-
-  if (auth()->user()->org_name == 'other') {
+  // if (auth()->user()->org_name == 'other') {
     $user_resource_types = [
       ['value' => 1, 'name' => 'General Resource table 1'],
       ['value' => 2, 'name' => 'General Resource table 2'],
@@ -86,32 +85,32 @@ function getUserResourceTypes()
       ['value' => 9, 'name' => 'General Resource table 7'],
       ['value' => 10, 'name' => 'General Resource table 9']
     ];
-  }
+  // }
 
-  if (auth()->user()->org_name == 'gidromet') {
-    $user_resource_types = [
-      ['value' => 1, 'name' => 'General Resource table 1'],
-      ['value' => 3, 'name' => 'General Resource table 3'],
-      ['value' => 4, 'name' => 'General Resource table 4'],
-      ['value' => 8, 'name' => 'General Resource table 6_b'],
-      ['value' => 9, 'name' => 'General Resource table 7'],
-      ['value' => 10, 'name' => 'General Resource table 9']
-    ];
-  }
+  // if (auth()->user()->org_name == 'gidromet') {
+  //   $user_resource_types = [
+  //     ['value' => 1, 'name' => 'General Resource table 1'],
+  //     ['value' => 3, 'name' => 'General Resource table 3'],
+  //     ['value' => 4, 'name' => 'General Resource table 4'],
+  //     ['value' => 8, 'name' => 'General Resource table 6_b'],
+  //     ['value' => 9, 'name' => 'General Resource table 7'],
+  //     ['value' => 10, 'name' => 'General Resource table 9']
+  //   ];
+  // }
 
-  if (auth()->user()->org_name == 'gidrogeologiya') {
-    $user_resource_types = [
-      ['value' => 2, 'name' => 'General Resource table 2'],
-      ['value' => 5, 'name' => 'General Resource table 5'],
-    ];
-  }
+  // if (auth()->user()->org_name == 'gidrogeologiya') {
+  //   $user_resource_types = [
+  //     ['value' => 2, 'name' => 'General Resource table 2'],
+  //     ['value' => 5, 'name' => 'General Resource table 5'],
+  //   ];
+  // }
 
-  if (auth()->user()->org_name == 'minvodxoz') {
-    $user_resource_types = [
-      ['value' => 6, 'name' => 'General Resource table 6'],
-      ['value' => 7, 'name' => 'General Resource table 6_a'],
-    ];
-  }
+  // if (auth()->user()->org_name == 'minvodxoz') {
+  //   $user_resource_types = [
+  //     ['value' => 6, 'name' => 'General Resource table 6'],
+  //     ['value' => 7, 'name' => 'General Resource table 6_a'],
+  //   ];
+  // }
 
   return $user_resource_types;
 }
@@ -134,4 +133,31 @@ function getRegionNames()
     "Хорезмский",
     "Республика Узбекистан"
   ];
+}
+
+function getDataEchangeName($name){
+  switch ($name){
+    case trans("messages.Operative Amu"): return trans("messages.Operative Amu"); break;
+    case trans("messages.Operative Sird"): return trans("messages.Operative Sird"); break;
+    case trans("messages.Rejim Gidro"): return trans("messages.Rejim Gidro"); break;
+    case trans("messages.Every Day Datas"): return trans("messages.Every Day Datas"); break;
+    case trans("messages.Volume month reservoir"): return trans("messages.Volume month reservoir"); break;
+    case trans("messages.Place birth"): return trans("messages.Place birth"); break;
+    case trans("messages.Well"): return trans("messages.Well"); break;
+    default : return 'Таблица';
+  }
+}
+
+
+function getDataEchangeType($name){
+  switch ($name){
+    case trans("messages.Operative Amu"): return 1; break;
+    case trans("messages.Operative Sird"): return 2; break;
+    case trans("messages.Rejim Gidro"): return 3; break;
+    case trans("messages.Every Day Datas"): return 4; break;
+    case trans("messages.Volume month reservoir"): return 5; break;
+    case trans("messages.Place birth"): return 6; break;
+    case trans("messages.Well"): return 7; break;
+    default : return 0;
+  }
 }

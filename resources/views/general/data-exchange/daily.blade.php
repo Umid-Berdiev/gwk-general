@@ -16,7 +16,6 @@
         <!-- end search form -->
         @include('general.data-exchange.export-form')
       </div>
-
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-bordered table-sm small" id="exportable_table">
@@ -50,9 +49,10 @@
             </thead>
             <tbody>
               @isset($allDatas)
+                @php $k = 1; @endphp
               @forelse($allDatas as $key => $dayData)
               <tr>
-                <td>{{ (int)$key + 1 }}</td>
+                <td>{{ $k++ }}</td>
                 @foreach($dayData as $data)
                 <?php if($data['formObjectMorning']) {?><td style="text-align: center!important;">{{ $data['morning'] }}
                 </td><?php } ?>

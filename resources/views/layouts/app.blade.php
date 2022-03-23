@@ -7,8 +7,7 @@
 
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
-
-  <title>{{ config('app.name', 'ГОСУДАРСТВЕННЫЙ ВОДНЫЙ КАДАСТР РЕСПУБЛИКИ УЗБЕКИСТАН') }}</title>
+  <title>{{ config('app.appName') }}</title>
 
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}" defer></script>

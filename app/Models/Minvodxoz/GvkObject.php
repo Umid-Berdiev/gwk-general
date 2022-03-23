@@ -9,6 +9,7 @@ use App\Information;
 
 class GvkObject extends Model
 {
+  public $timestamps = false;
     protected $fillable = ['name','form_id','unit_id','number','type_id', 'get', 'set', 'obj_id', 'name_ru'];
 
     public function unit(): BelongsTo
@@ -37,6 +38,11 @@ class GvkObject extends Model
             if($value->id == $this->unit_id) return $value->name;
         }
         return "";
+    }
+
+    public function object_datas()
+    {
+      return $this->hasOne(ReservoirMonthlyDatas::class, 'object_id','id');
     }
 
     public function information(): HasMany

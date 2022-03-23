@@ -65,7 +65,7 @@ class PlaceBirthController extends Controller
   /**
    * Store a newly created resource in storage.
    *
-   * @param  \Illuminate\Http\Request  $request
+   * @param \Illuminate\Http\Request $request
    * @return \Illuminate\Http\Response
    */
   public function store(Request $request)
@@ -76,7 +76,7 @@ class PlaceBirthController extends Controller
       'year' => 'required'
     ]);
 
-    $birth_place =  new PlaceBirth();
+    $birth_place = new PlaceBirth();
     $birth_place->code = Input::get('code');
     $birth_place->name = Input::get('name');
     // $birth_place->location = Input::get('location');
@@ -117,7 +117,7 @@ class PlaceBirthController extends Controller
   /**
    * Display the specified resource.
    *
-   * @param  int  $id
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function show($id)
@@ -128,7 +128,7 @@ class PlaceBirthController extends Controller
   /**
    * Show the form for editing the specified resource.
    *
-   * @param  int  $id
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function edit(Request $request)
@@ -140,7 +140,7 @@ class PlaceBirthController extends Controller
     }
     if ($request->has('code')) {
       $birth_place = PlaceBirth::where('isDeleted', false)->where('code', $request->get('code'))->whereBetween('year', [$request->get('start'), $request->get('finish')])->get();
-      if (count($birth_place)  > 0)
+      if (count($birth_place) > 0)
         return $birth_place;
       else
         return "false";
@@ -150,8 +150,8 @@ class PlaceBirthController extends Controller
   /**
    * Update the specified resource in storage.
    *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
+   * @param \Illuminate\Http\Request $request
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function update(Request $request)
@@ -203,7 +203,7 @@ class PlaceBirthController extends Controller
   /**
    * Remove the specified resource from storage.
    *
-   * @param  int  $id
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function destroy($id)
@@ -262,7 +262,7 @@ class PlaceBirthController extends Controller
           });
         elseif ($key == 'users')
           $data = $data->whereHas('users', function ($query) {
-            $query->where('email', 'ilike',  '%' . request()->user . '%');
+            $query->where('email', 'ilike', '%' . request()->user . '%');
           });
         else return redirect(route('gg.reestr.bp.index'))->with('warning', 'Нет данных по этим критериям!');
       }

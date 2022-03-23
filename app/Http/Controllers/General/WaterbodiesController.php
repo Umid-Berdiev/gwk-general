@@ -39,28 +39,16 @@ class WaterbodiesController extends Controller
     $uz_regions = UzRegion::all();
 
 
-
-
     return view('pages.reestr.waterbodies.waterbodies')
       ->with('uz_regions', $uz_regions)
       ->with('water_bodies', $water_bodies)
       ->with('wb_types', $wb_types);
-
-
-    //	    $water_bodies_attr = Waterbodies_attr::where('waterbody_id','=',$waterbodies->id)->get();
   }
 
   public function ajax()
   {
     $water_bodies = Waterbodies::orderby('id', 'ASC')->where('isDeleted', '=', false)->get();
-
-
-
-
     return $water_bodies;
-
-
-    //	    $water_bodies_attr = Waterbodies_attr::where('waterbody_id','=',$waterbodies->id)->get();
   }
 
   /**
@@ -90,7 +78,7 @@ class WaterbodiesController extends Controller
   /**
    * Store a newly created resource in storage.
    *
-   * @param  \Illuminate\Http\Request  $request
+   * @param \Illuminate\Http\Request $request
    * @return \Illuminate\Http\Response
    */
   public function store(Request $request)
@@ -129,15 +117,13 @@ class WaterbodiesController extends Controller
     }
 
 
-
-
-    return  redirect()->route('wb.index');
+    return redirect()->route('wb.index');
   }
 
   /**
    * Display the specified resource.
    *
-   * @param  int  $id
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function show($id)
@@ -148,7 +134,7 @@ class WaterbodiesController extends Controller
   /**
    * Show the form for editing the specified resource.
    *
-   * @param  int  $id
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function edit()
@@ -171,8 +157,8 @@ class WaterbodiesController extends Controller
   /**
    * Update the specified resource in storage.
    *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
+   * @param \Illuminate\Http\Request $request
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function update(Request $request)
@@ -213,14 +199,13 @@ class WaterbodiesController extends Controller
     }
 
 
-
-    return  redirect()->route('wb.index');
+    return redirect()->route('wb.index');
   }
 
   /**
    * Remove the specified resource from storage.
    *
-   * @param  int  $id
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function destroy($id)
@@ -228,7 +213,7 @@ class WaterbodiesController extends Controller
     $watervodies = Waterbodies::find($id);
     $watervodies->isDeleted = true;
     $watervodies->save();
-    return  redirect()->route('wb.index');
+    return redirect()->route('wb.index');
   }
 
   public function ExportTemplate()
@@ -246,6 +231,7 @@ class WaterbodiesController extends Controller
   {
     return Excel::download(new WaterbodiesExport(), 'Природные водные объекты_' . Carbon::now() . '.xlsx');
   }
+
   public function search()
   {
     if (
@@ -301,6 +287,7 @@ class WaterbodiesController extends Controller
       return redirect(route('wb.index'));
     }
   }
+
   public function MultiSelect()
   {
     foreach (Input::get('checkeds') as $element) {

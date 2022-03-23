@@ -16,7 +16,6 @@ class ResourcesRegionsController extends Controller
   public function index()
   {
     $user_resource_types = getUserResourceTypes();
-
     return view('general.pages.resources.index', compact('user_resource_types'));
   }
 
@@ -56,7 +55,7 @@ class ResourcesRegionsController extends Controller
 
     $region_names = getRegionNames();
 
-    if (in_array(auth()->user()->org_name, ['gidromet', 'other'])) {
+//    if (in_array(auth()->user()->org_name, ['gidromet', 'other'])) {
       $resource_with_year = ResourcesRegions::where('years', $request->selected_year)->count();
       if ($resource_with_year == 0) {
         foreach ($region_names as $region_name) {
@@ -96,16 +95,16 @@ class ResourcesRegionsController extends Controller
           'user_resource_types' => $user_resource_types
         ]);
       }
-    } else {
-      abort(404);
-    }
+//    } else {
+//      abort(404);
+//    }
   }
 
   /**
    * Update the specified resource in storage.
    *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
+   * @param \Illuminate\Http\Request $request
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function update(Request $request)

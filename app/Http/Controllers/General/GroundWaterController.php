@@ -18,7 +18,6 @@ class GroundWaterController extends Controller
     $user_resource_types = getUserResourceTypes();
     $selected_year = $request->selected_year;
 
-    if (auth()->user()->org_name == 'gidrogeologiya' || auth()->user()->org_name == 'other') {
       $ground_water = GroundwaterResources::where('years', $selected_year)->count();
       $last_update_date = GroundwaterResources::select('updated_at', 'user_id', 'is_approve', 'years')->where('years', $selected_year)->orderBy('updated_at', 'DESC')->first();
 
@@ -185,16 +184,13 @@ class GroundWaterController extends Controller
           'user_resource_types' => $user_resource_types
         ]);
       }
-    } else {
-      return abort(404);
-    }
   }
 
   /**
    * Update the specified resource in storage.
    *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
+   * @param \Illuminate\Http\Request $request
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function update(Request $request)

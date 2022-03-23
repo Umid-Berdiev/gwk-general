@@ -17,11 +17,11 @@ class InformationLargeCanalsIrigationSystem extends Controller
    * @return \Illuminate\Http\Response
    */
   public function index(Request $request)
-  {
+  { 
     $user_resource_types = getUserResourceTypes();
     $selected_year = $request->selected_year;
 
-    if (auth()->user()->org_name == 'gidromet' || auth()->user()->org_name == 'other') {
+    // if (auth()->user()->org_name == 'gidromet' || auth()->user()->org_name == 'other') {
       $information_large_canals = ModelName::where('years', $selected_year)->count();
       $last_update_date = ModelName::select('updated_at', 'user_id', 'is_approve', 'years')->where('years', $selected_year)->orderBy('updated_at', 'DESC')->first();
 
@@ -359,16 +359,16 @@ class InformationLargeCanalsIrigationSystem extends Controller
           'user_resource_types' => $user_resource_types
         ]);
       }
-    } else {
-      return abort(404);
-    }
+    // } else {
+    //   return abort(404);
+    // }
   }
 
   /**
    * Update the specified resource in storage.
    *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
+   * @param \Illuminate\Http\Request $request
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function update(Request $request)

@@ -154,7 +154,6 @@ class Information extends Model
       if ($model == null) {
         //dd($dayValue);
         $newObject = self::findObject($dayValue['object']);
-
         $model = new Information();
         $model->date = $dayValue['date'];
         $model->value = $dayValue['value'];

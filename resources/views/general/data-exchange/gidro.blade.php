@@ -42,8 +42,6 @@
               <tr>
                 <td class="text-center">
                   <input type="checkbox" v-model="checkList" value="{{ $data['id'] }}">
-                  {{-- <input type="checkbox" name="object[]" class="gr-obj-class" data-status="0"
-                    data-name="{{ $data['station']['station_name'] }}" value="{{ $data['station_id'] }}"> --}}
                 </td>
                 <td class="text-left">
                   <pre>{{ $data['station'] ? $data['station']['station_name'] : '' }}</pre>

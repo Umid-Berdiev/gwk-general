@@ -35,9 +35,7 @@
           <th>№ п.п</th>
           <th>Имя пользователя</th>
           <th>ФИО</th>
-          {{-- <th>Роль</th> --}}
-          <th>Уровень</th>
-          <th>Подразделение</th>
+           <th>Роль</th>
           <th>Эл.почта</th>
           <th class="text-center"><i class="bi bi-list"></i></th>
         </tr>
@@ -48,26 +46,7 @@
           <td>{{ (($key + 1) + $users->currentPage() * $users->perPage()) - $users->perPage() }}</td>
           <td>{{$user->email}}</td>
           <td>{{$user->getFullname()}}</td>
-          {{-- @foreach($user->getRoleNames() as $item)
-          @if($item == 'Administrator')
-          <td>{{__('messages.administrator')}}</td>
-          @elseif($item == 'Editor')
-          <td>{{__('messages.editor')}}</td>
-          @elseif($item == 'Viewer')
-          <td>{{__('messages.viewer')}}</td>
-          @endif
-          @endforeach --}}
-          <td>{{$user->level && $user->level->level}}</td>
-          <td>
-            @foreach($user->user_attrs as $key => $item)
-            @if (count($user->user_attrs) > 1)
-            {{ $user->user_attrs[0]->minvodxoz_section->name . ', ...' }}<br>
-            @break
-            @else
-            {{$item->minvodxoz_section->name}}<br>
-            @endif
-            @endforeach
-          </td>
+          <td>{{ (isset($user->role->name)) ?  __('messages.'.$user->role->name) : ''}}</td>
           <td>{{$user->user_email}}</td>
           <td class="text-center">
             <button type="button" class="btn btn-sm btn-outline-info waves-effect" data-toggle="modal"
@@ -99,7 +78,7 @@
   aria-hidden="true">
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
-      <form action="{{ route('users.store') }}" method="post" class="was-validated" onsubmit="return checkForm(this);">
+      <form action="{{ route('users.store') }}" method="post" class="was-validated" >
         @csrf
         <div class="modal-header bg-primary text-white">
           <h4 class="modal-title" id="createUserModalLabel">{{ __("messages.Пользователь") }} -
@@ -108,107 +87,70 @@
         <div class="modal-body">
           <div class="small">
             <div class="form-row">
-              <div class="form-group col-auto">
+              <div class="form-group col-md-3">
                 <label>{{ __("messages.Пользователь") }}</label>
                 <input type="text" name="email" maxlength="100" class="form-control form-control-sm" required>
                 <div class="invalid-feedback">
                   Укажите логин пользователя
                 </div>
               </div>
-              <div class="form-group col-auto">
+              <div class="form-group col-md-3">
                 <label>Фамилия</label>
                 <input type="text" name="lastname" maxlength="40" class="form-control form-control-sm" required>
                 <div class="invalid-feedback">
                   Укажите фамилию пользователя
                 </div>
               </div>
-              <div class="form-group col-auto">
+              <div class="form-group col-md-3">
                 <label>Имя</label>
                 <input type="text" name="firstname" maxlength="40" class="form-control form-control-sm" required>
                 <div class="invalid-feedback">
                   Укажите имя пользователя
                 </div>
               </div>
-              <div class="form-group col-auto">
+              <div class="form-group col-md-3">
                 <label>Отчество</label>
                 <input type="text" name="middlename" maxlength="40" class="form-control form-control-sm" required>
               </div>
               <div class="invalid-feedback">
                 Укажите отчество пользователя
               </div>
-              <div class="form-group col-auto">
+              <div class="form-group col-md-3">
                 <label>Роль</label>
                 <select class="custom-select custom-select-sm" name="roll_id" required>
                   @foreach($rolls as $roll)
-                  <option value="{{ $roll->id }}">{{ $roll->name }}</option>
+                  <option value="{{ $roll->id }}">{{  __('messages.'.$roll->name) }}</option>
                   @endforeach
                 </select>
                 <div class="invalid-feedback">
                   Выберите роль для пользователя
                 </div>
               </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-auto">
-                <label>Подразделение</label>
-                <select class="selectpicker" name="division_id[]" multiple data-live-search="true"
-                  data-selected-text-format="count > 2" title="{{ __('messages.choose') }}.." data-width='100%'
-                  data-actions-box="true" required>
-                  @foreach($divisions as $division)
-                  <option value="{{$division->id}}">{{$division->name}}</option>
-                  @endforeach
-                </select>
-                <div class="invalid-feedback">
-                  Выберите подразделения для пользователя
-                </div>
-              </div>
-              <div class="form-group col-auto">
-                <label>Уровень</label>
-                <select class="custom-select custom-select-sm" name="level_id" required>
-                  <option value="" selected disabled hidden>{{ __('messages.choose') }}..</option>
-                  @foreach($levels as $level)
-                  <option value="{{$level->id}}">{{$level->level}}</option>
-                  @endforeach
-                </select>
-                <div class="invalid-feedback">
-                  Выберите уровень для пользователя
-                </div>
-              </div>
-              <div class="form-group col-auto">
+              <div class="form-group col-md-3">
                 <label>Область</label>
                 <select class="custom-select custom-select-sm" name="regions" required>
                   <option value="" selected disabled hidden>{{ __('messages.choose') }}..</option>
                   @foreach($uz_regions as $region)
-                  <option value="{{$region->regionid}}">{{$region->nameRu}}</option>
+                    <option value="{{$region->regionid}}">{{$region->nameRu}}</option>
                   @endforeach
                 </select>
                 <div class="invalid-feedback">
                   Выберите область
                 </div>
               </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-auto">
+              <div class="form-group col-md-3">
                 <label>Эл.почта</label>
                 <input type="email" name="user_email" maxlength="100" class="form-control form-control-sm" required>
                 <div class="invalid-feedback">
                   Укажите правильный формат эл.почты
                 </div>
               </div>
-              <div class="form-group col-auto">
+              <div class="form-group col-md-3">
                 <label>Пароль</label>
                 <input type="password" name="password" id="password1" class="form-control form-control-sm" required
-                  pattern="[A-Za-z0-9]{7,}">
+                       pattern="[A-Za-z0-9]{7,}">
                 <div class="invalid-feedback">
                   Пароль, минимум 7 значений (A-Za-z0-9)
-                </div>
-              </div>
-              <div class="form-group col-auto">
-                <label>Подтверждение пароля</label>
-                <input type="password" name="confirm_password" id="confirm_password1"
-                  class="form-control form-control-sm" required>
-                <div class="invalid-feedback passwords-match">
-                  Пароли не совподали
                 </div>
               </div>
             </div>
@@ -228,7 +170,7 @@
   aria-hidden="true">
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
-      <form :action=`/admin/users/${user.id}` method="post" class="was-validated" onsubmit="return checkForm(this);">
+      <form :action=`/admin/users/${user.id}` method="post" class="was-validated">
         @csrf
         @method('put')
 
@@ -239,7 +181,7 @@
         <div class="modal-body">
           <div class="small">
             <div class="form-row">
-              <div class="form-group col-auto">
+              <div class="form-group col-md-3">
                 <label>Имя пользователя</label>
                 <input type="text" name="email" maxlength="100" v-model="user.email"
                   class="form-control form-control-sm" required>
@@ -248,7 +190,7 @@
                   Укажите логин пользователя
                 </div>
               </div>
-              <div class="form-group col-auto">
+              <div class="form-group  col-md-3">
                 <label>Фамилия</label>
                 <input type="text" name="lastname" maxlength="40" v-model="user.lastname"
                   class="form-control form-control-sm" required>
@@ -256,7 +198,7 @@
                   Укажите фамилию пользователя
                 </div>
               </div>
-              <div class="form-group col-auto">
+              <div class="form-group  col-md-3">
                 <label>Имя</label>
                 <input type="text" name="firstname" maxlength="40" v-model="user.firstname"
                   class="form-control form-control-sm" required>
@@ -264,7 +206,7 @@
                   Укажите имя пользователя
                 </div>
               </div>
-              <div class="form-group col-auto">
+              <div class="form-group  col-md-3">
                 <label>Отчество</label>
                 <input type="text" name="middlename" maxlength="40" v-model="user.middlename"
                   class="form-control form-control-sm" required>
@@ -272,89 +214,42 @@
                   Укажите отчество пользователя
                 </div>
               </div>
-              <div class="form-group col-auto">
+              <div class="form-group col-md-3">
                 <label>Роль</label>
                 <select class="custom-select custom-select-sm" name="roll_id" required>
-                  <option v-for="role in roles" :value="role.id" v-text="role.name"></option>
-                  {{-- @foreach($rolls as $roll)
-                  @if($roll->name == 'Administrator')
-                  <option value="{{$roll->name}}">{{App\Helpers\MyHelpers::__('messages.administrator')}}</option>
-                  @elseif($roll->name == 'Editor')
-                  <option value="{{$roll->name}}">{{App\Helpers\MyHelpers::__('messages.editor')}}</option>
-                  @elseif($roll->name == 'Viewer')
-                  <option value="{{$roll->name}}">{{App\Helpers\MyHelpers::__('messages.viewer')}}</option>
-                  @endif
-                  @endforeach --}}
+                  "<option v-for="role in roles" :selected="user.role_id == role.id" :value="role.id" v-text="getRoleName(role.name)"></option>
                 </select>
                 <div class="invalid-feedback">
                   Выберите роль для пользователя
                 </div>
               </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-auto">
-                <label>Подразделение</label>
-                <select class="selectpicker" v-model="divisions" name="division_id[]" multiple data-live-search='true'
-                  data-width="100%" data-selected-text-format="count > 2" data-actions-box="true" required>
-                  @foreach($divisions as $division)
-                  <option value="{{ $division->id }}">{{ $division->name }}</option>
-                  @endforeach
-                  {{-- <option v-for="division in divisions" :selected="division.id == " value="division.id" v-text="division.name"></option> --}}
-                </select>
-                <div class="invalid-feedback">
-                  Выберите подразделения для пользователя
-                </div>
-              </div>
-              <div class="form-group col-auto">
-                <label>Уровень</label>
-                <select class="custom-select custom-select-sm" v-model="user.level_id" name="level_id" required>
-                  <option value="" selected disabled hidden>{{ __('messages.choose') }}..</option>
-                  @foreach($levels as $level)
-                  <option value="{{$level->id}}">{{$level->level}}</option>
-                  @endforeach
-                </select>
-                <div class="invalid-feedback">
-                  Выберите уровень для пользователя
-                </div>
-              </div>
-              <div class="form-group col-auto">
+              <div class="form-group col-md-3">
                 <label>Области</label>
                 <select class="custom-select custom-select-sm" v-model="user.region_id" name="regions" required>
                   <option value="" selected disabled hidden>{{ __('messages.choose') }}..</option>
                   @foreach($uz_regions as $region)
-                  <option value="{{$region->regionid}}">{{$region->nameRu}}</option>
+                    <option value="{{$region->regionid}}">{{$region->nameRu}}</option>
                   @endforeach
                 </select>
                 <div class="invalid-feedback">
                   Выберите область
                 </div>
               </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group col-auto">
+              <div class="form-group col-md-3">
                 <label>Эл.почта</label>
                 <input type="email" name="user_email" maxlength="100" v-model="user.user_email"
-                  class="form-control form-control-sm" required>
+                       class="form-control form-control-sm" required>
                 <div class="invalid-feedback">
                   Укажите правильный формат эл.почты
                 </div>
               </div>
 
-              <div class="form-group col-auto">
-                <label>Пароль</label>
-                <input type="password" name="password" id="password2" class="form-control form-control-sm" required
-                  pattern="[A-Za-z0-9]{7,}">
+              <div class="form-group col-md-3">
+                <label>Новий пароль</label>
+                <input type="password" name="new_password" id="password2" class="form-control form-control-sm"
+                       pattern="[A-Za-z0-9]{7,}">
                 <div class="invalid-feedback">
                   Пароль, минимум 7 значений (A-Za-z0-9)
-                </div>
-              </div>
-              <div class="form-group col-auto">
-                <label>Подтверждение пароля</label>
-                <input type="password" name="confirm_password" id="confirm_password2"
-                  class="form-control form-control-sm">
-                <div class="invalid-feedback passwords-match">
-                  Пароли не совподали
                 </div>
               </div>
             </div>
@@ -414,6 +309,14 @@
     },
 
     methods: {
+
+      getRoleName(name){
+        if(name == 'Administrator') return "{{__('messages.Administrator')}}";
+        if(name == 'Viewer') return "{{__('messages.Viewer')}}";
+        if(name == 'Editor') return "{{__('messages.Editor')}}";
+        if(name == 'Author') return "{{__('messages.Author')}}";
+        if(name == 'Data_exchange') return "{{__('messages.Data_exchange')}}";
+      },
       getPositions(id) {
         results = [];
 

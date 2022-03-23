@@ -26,7 +26,9 @@ class GidrogeologiyaWellData extends Model
           $item->cadaster_number == $data['cadaster_number'];
       })->first();
 
-      if ($model == null) $model = new GidrogeologiyaWellData();
+      if ($model == null) {
+        $model = new GidrogeologiyaWellData();
+      }
 
       $model->year = $year;
       $model->wells_type_id = $data['wells_type_id'];
@@ -36,5 +38,7 @@ class GidrogeologiyaWellData extends Model
       $model->mineralization = (float)$data['mineralization'];
       $model->save();
     }
+    return true;
   }
+
 }

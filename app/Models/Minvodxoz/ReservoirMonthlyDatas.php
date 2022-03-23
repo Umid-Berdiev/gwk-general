@@ -33,51 +33,71 @@ class ReservoirMonthlyDatas extends Model
     public static function setDatas($datas, $year)
     {
     	foreach ($datas as $data) {
-    		$object_datas = $data['object_datas'];
-    		//dd($object_datas);
-    		$model = ReservoirMonthlyDatas::where(['year' => $year, 'object_id' => $data['object_id']])->first();
-    		if($model == null) $model = new ReservoirMonthlyDatas();
-    		
-    		$model->object_id = $data['object_id'];
-    		$model->year = $year;
-    		$model->january_1 = $object_datas['january_1'];
-    		$model->january_2 = $object_datas['january_2'];
-    		$model->january_3 = $object_datas['january_3'];
-    		$model->february_1 = $object_datas['february_1'];
-    		$model->february_2 = $object_datas['february_2'];
-    		$model->february_3 = $object_datas['february_3'];
-    		$model->march_1 = $object_datas['march_1'];
-    		$model->march_2 = $object_datas['march_2'];
-    		$model->march_3 = $object_datas['march_3'];
-    		$model->april_1 = $object_datas['april_1'];
-    		$model->april_2 = $object_datas['april_2'];
-    		$model->april_3 = $object_datas['april_3'];
-    		$model->may_1 = $object_datas['may_1'];
-    		$model->may_2 = $object_datas['may_2'];
-    		$model->may_3 = $object_datas['may_3'];
-    		$model->june_1 = $object_datas['june_1'];
-    		$model->june_2 = $object_datas['june_2'];
-    		$model->june_3 = $object_datas['june_3'];
-    		$model->july_1 = $object_datas['july_1'];
-    		$model->july_2 = $object_datas['july_2'];
-    		$model->july_3 = $object_datas['july_3'];
-    		$model->august_1 = $object_datas['august_1'];
-    		$model->august_2 = $object_datas['august_2'];
-    		$model->august_3 = $object_datas['august_3'];
-    		$model->september_1 = $object_datas['september_1'];
-    		$model->september_2 = $object_datas['september_2'];
-    		$model->september_3 = $object_datas['september_3'];
-    		$model->october_1 = $object_datas['october_1'];
-    		$model->october_2 = $object_datas['october_2'];
-    		$model->october_3 = $object_datas['october_3'];
-    		$model->november_1 = $object_datas['november_1'];
-    		$model->november_2 = $object_datas['november_2'];
-    		$model->november_3 = $object_datas['november_3'];
-    		$model->decamber_1 = $object_datas['decamber_1'];
-    		$model->decamber_2 = $object_datas['decamber_2'];
-    		$model->decamber_3 = $object_datas['decamber_3'];
-    		$model->save();
-    	}
+        $object_datas = $data['object_datas'];
+        $object_id = self::setObject($data);
+
+        //dd($object_datas);
+        if ($object_id) {
+          $model = ReservoirMonthlyDatas::where(['year' => $year, 'object_id' => $object_id])->first();
+          if ($model == null) $model = new ReservoirMonthlyDatas();
+          $model->object_id = $object_id;
+          $model->year = $year;
+          $model->january_1 = $object_datas['january_1'];
+          $model->january_2 = $object_datas['january_2'];
+          $model->january_3 = $object_datas['january_3'];
+          $model->february_1 = $object_datas['february_1'];
+          $model->february_2 = $object_datas['february_2'];
+          $model->february_3 = $object_datas['february_3'];
+          $model->march_1 = $object_datas['march_1'];
+          $model->march_2 = $object_datas['march_2'];
+          $model->march_3 = $object_datas['march_3'];
+          $model->april_1 = $object_datas['april_1'];
+          $model->april_2 = $object_datas['april_2'];
+          $model->april_3 = $object_datas['april_3'];
+          $model->may_1 = $object_datas['may_1'];
+          $model->may_2 = $object_datas['may_2'];
+          $model->may_3 = $object_datas['may_3'];
+          $model->june_1 = $object_datas['june_1'];
+          $model->june_2 = $object_datas['june_2'];
+          $model->june_3 = $object_datas['june_3'];
+          $model->july_1 = $object_datas['july_1'];
+          $model->july_2 = $object_datas['july_2'];
+          $model->july_3 = $object_datas['july_3'];
+          $model->august_1 = $object_datas['august_1'];
+          $model->august_2 = $object_datas['august_2'];
+          $model->august_3 = $object_datas['august_3'];
+          $model->september_1 = $object_datas['september_1'];
+          $model->september_2 = $object_datas['september_2'];
+          $model->september_3 = $object_datas['september_3'];
+          $model->october_1 = $object_datas['october_1'];
+          $model->october_2 = $object_datas['october_2'];
+          $model->october_3 = $object_datas['october_3'];
+          $model->november_1 = $object_datas['november_1'];
+          $model->november_2 = $object_datas['november_2'];
+          $model->november_3 = $object_datas['november_3'];
+          $model->decamber_1 = $object_datas['decamber_1'];
+          $model->decamber_2 = $object_datas['decamber_2'];
+          $model->decamber_3 = $object_datas['decamber_3'];
+          $model->save();
+        }
+      }
+      return true;
+    }
+
+    public static function setObject($data)
+    {
+       if(isset($data['object_id']) && isset($data['object_name'])){
+           $gvkObject = GvkObject::where('id',$data['object_id'])
+             ->first();
+           if(empty($gvkObject)){
+                $gvkObject = new GvkObject();
+                $gvkObject->name = $data['object_name'];
+                $gvkObject->save();
+                return $gvkObject->id;
+           }
+         return $gvkObject->id ?? null;
+       }
+       return  null;
     }
 
 }

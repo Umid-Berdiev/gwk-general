@@ -19,8 +19,8 @@ class WaterUsesController extends Controller
     $region_names = getRegionNames();
     $selected_year = $request->selected_year;
 
-    if (auth()->user()->org_name == 'gidromet' || auth()->user()->org_name == 'other') {
-      $water_uses   = Wateruse::where('years', $selected_year)->count();
+//    if (auth()->user()->org_name == 'gidromet' || auth()->user()->org_name == 'other') {
+      $water_uses = Wateruse::where('years', $selected_year)->count();
       $last_update_date = Wateruse::select('updated_at', 'user_id', 'is_approve', 'years')
         ->where('years', $selected_year)
         ->orderBy('updated_at', 'DESC')
@@ -55,16 +55,16 @@ class WaterUsesController extends Controller
           'user_resource_types' => $user_resource_types
         ]);
       }
-    } else {
-      return abort(404);
-    }
+//    } else {
+//      return abort(404);
+//    }
   }
 
   /**
    * Update the specified resource in storage.
    *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
+   * @param \Illuminate\Http\Request $request
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function update(Request $request)

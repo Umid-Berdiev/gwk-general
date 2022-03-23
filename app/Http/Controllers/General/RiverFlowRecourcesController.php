@@ -17,8 +17,6 @@ class RiverFlowRecourcesController extends Controller
   {
     $user_resource_types = getUserResourceTypes();
     $selected_year = $request->selected_year;
-
-    if (auth()->user()->org_name == 'gidromet' || auth()->user()->org_name == 'other') {
       $river_recourses = RiverFlowRecources::where('years', $selected_year)->count();
       $last_update_date = RiverFlowRecources::select('updated_at', 'user_id', 'is_approve', 'years')
         ->where('years', $selected_year)
@@ -299,16 +297,14 @@ class RiverFlowRecourcesController extends Controller
           'user_resource_types' => $user_resource_types
         ]);
       }
-    } else {
-      return abort(404);
-    }
+
   }
 
   /**
    * Update the specified resource in storage.
    *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
+   * @param \Illuminate\Http\Request $request
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function update(Request $request)

@@ -19,7 +19,7 @@ class WaterUseVariousController extends Controller
     $selected_year = $request->selected_year;
     $region_names = getRegionNames();
 
-    if (auth()->user()->org_name == 'minvodxoz' || auth()->user()->org_name == 'other') {
+//    if (auth()->user()->org_name == 'minvodxoz' || auth()->user()->org_name == 'other') {
       $water_use_needs = WaterUseVariousNeeds::where('years', $selected_year)->count();
       $last_update_date = WaterUseVariousNeeds::select('updated_at', 'user_id', 'is_approve', 'years')->where('years', $selected_year)->orderBy('updated_at', 'DESC')->first();
 
@@ -35,7 +35,7 @@ class WaterUseVariousController extends Controller
 
         $water_use_needs = WaterUseVariousNeeds::orderby('id', 'ASC')->get();
 
-        return  view('general.pages.resources.water_user_variouse_needs.water_user_variouse_needs', [
+        return view('general.pages.resources.water_user_variouse_needs.water_user_variouse_needs', [
           'water_use_needs' => $water_use_needs,
           'selected_year' => $selected_year,
           'selected_type_value' => $request->selected_type_value,
@@ -44,7 +44,7 @@ class WaterUseVariousController extends Controller
         ]);
       } else {
         $water_use_needs = WaterUseVariousNeeds::where('years', $selected_year)->orderby('id', 'ASC')->get();
-        return  view('general.pages.resources.water_user_variouse_needs.water_user_variouse_needs', [
+        return view('general.pages.resources.water_user_variouse_needs.water_user_variouse_needs', [
           'water_use_needs' => $water_use_needs,
           'selected_year' => $selected_year,
           'selected_type_value' => $request->selected_type_value,
@@ -52,16 +52,16 @@ class WaterUseVariousController extends Controller
           'user_resource_types' => $user_resource_types
         ]);
       }
-    } else {
-      return abort(404);
-    }
+//    } else {
+//      return abort(404);
+//    }
   }
 
   /**
    * Update the specified resource in storage.
    *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
+   * @param \Illuminate\Http\Request $request
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function update(Request $request)

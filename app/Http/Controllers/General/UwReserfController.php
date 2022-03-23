@@ -22,8 +22,8 @@ class UwReserfController extends Controller
 
     $region_names = getRegionNames();
 
-    if (auth()->user()->org_name == 'gidrogeologiya' || auth()->user()->org_name == 'other') {
-      $uw_resers  = UiReserfs::where('years', $request->selected_year)->count();
+//    if (auth()->user()->org_name == 'gidrogeologiya' || auth()->user()->org_name == 'other') {
+      $uw_resers = UiReserfs::where('years', $request->selected_year)->count();
       $last_update_date = UiReserfs::select('updated_at', 'user_id', 'is_approve', 'years')
         ->where('years', $request->selected_year)
         ->orderBy('updated_at', 'DESC')
@@ -58,16 +58,16 @@ class UwReserfController extends Controller
           'user_resource_types' => $user_resource_types
         ]);
       }
-    } else {
-      abort(404);
-    }
+//    } else {
+//      abort(404);
+//    }
   }
 
   /**
    * Update the specified resource in storage.
    *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
+   * @param \Illuminate\Http\Request $request
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function update(Request $request)

@@ -68,6 +68,12 @@ class User extends Authenticatable
     return $this->belongsTo(Role::class, 'role_id', 'id');
   }
 
+
+  public function roleName()
+  {
+    return $this->hasOne(Role::class , 'id','role_id');
+  }
+
   public function getUserTypeName()
   {
     if ($this->user_type == 'gidromet') return 'Гидромет';

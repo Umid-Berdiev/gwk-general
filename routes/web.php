@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\General\MapController;
 use App\Http\Controllers\General\UserController;
 use App\Http\Controllers\HomeController;
@@ -23,14 +24,18 @@ Route::group(['middleware' => ['localization']], function () {
   Auth::routes();
   Route::group(['middleware' => ['auth']], function () {
     Route::get('language/set', [LanguageController::class, 'setLang'])->name('lang.set');
-    Route::get('/', function () {
-      return view('general.pages.dashboard');
-    })->name('dashboard');
-
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::group(['prefix' => 'report'], function () {
       Route::get('/', 'App\Http\Controllers\General\WordExportController@index')->name('report.index');
       Route::post('/export', 'App\Http\Controllers\General\WordExportController@GenereteWord')->name('word.export');
+    });
+
+    Route::prefix('/units')->group(function () {
+      Route::get('/', 'App\Http\Controllers\General\UnitsController@index')->name('units-index');
+      Route::get('/destroy/{id}', 'App\Http\Controllers\General\UnitsController@destroy')->name('units-delete');
+      Route::post('/store', 'App\Http\Controllers\General\UnitsController@store')->name('units-store');
+      Route::post('/update', 'App\Http\Controllers\General\UnitsController@update')->name('units-update');
     });
 
     Route::group(['prefix' => 'resources'], function () {
@@ -96,7 +101,7 @@ Route::group(['middleware' => ['localization']], function () {
       });
     });
 
-    Route::prefix('data-exchange')->group(function () {
+    Route::group(['prefix' => 'data-exchange','middleware' => 'data_exchange'], function () {
       Route::get('/', 'App\Http\Controllers\General\DataExchangeController@index')->name('exchange-index');
       Route::get('/instance-element', 'App\Http\Controllers\General\DataExchangeController@getInstanceElements')->name('exchange.instance.elements');
       Route::get('/instance-element-data', 'App\Http\Controllers\General\DataExchangeController@getInstanceElementData')->name('exchange.instance.element.data');
@@ -114,6 +119,8 @@ Route::group(['middleware' => ['localization']], function () {
       Route::post('/delete-object-from-daily', 'App\Http\Controllers\General\DataExchangeController@deleteObjFromDaily')->name('post-delete-object-from-daily');
       Route::get('/add-value', 'App\Http\Controllers\General\DataExchangeController@AddValueAjax')->name('add-value-ajax');
       Route::post('/add-infoadd-object-info-ajax', 'App\Http\Controllers\General\DataExchangeController@AddInfoAjax')->name('add-object-info-ajax');
+      Route::post('/save-data-historry', 'App\Http\Controllers\General\DataExchangeController@saveDataHistorty')->name('exchange.save-history-data');
+      Route::get('/logs', 'App\Http\Controllers\General\DataExchangeController@getLogList')->name('exchange.data-logs');
     });
 
 

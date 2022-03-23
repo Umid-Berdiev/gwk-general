@@ -32,6 +32,7 @@ const sidebarMenu = new Vue({
       isShown2: false,
       isShown3: false,
       isShown4: false,
+      isShown5: false,
       langs: false
     };
   },
@@ -51,6 +52,9 @@ const sidebarMenu = new Vue({
     if (sessionStorage.getItem("isShown4")) {
       this.isShown4 = JSON.parse(sessionStorage.getItem("isShown4"));
     }
+    if (sessionStorage.getItem("isShown5")) {
+      this.isShown4 = JSON.parse(sessionStorage.getItem("isShown5"));
+    }
     if (sessionStorage.getItem("langs")) {
       this.langs = JSON.parse(sessionStorage.getItem("langs"));
     }
@@ -64,36 +68,50 @@ const sidebarMenu = new Vue({
         sessionStorage.setItem("isShown2", false);
         sessionStorage.setItem("isShown3", false);
         sessionStorage.setItem("isShown4", false);
+        sessionStorage.setItem("isShown5", false);
       } else if (key == "isShown2") {
         this.isShown2 = !this.isShown2;
         sessionStorage.setItem("isShown1", false);
         sessionStorage.setItem(key, this.isShown2);
         sessionStorage.setItem("isShown3", false);
         sessionStorage.setItem("isShown4", false);
+        sessionStorage.setItem("isShown5", false);
       } else if (key == "isShown3") {
         this.isShown3 = !this.isShown3;
         sessionStorage.setItem("isShown1", false);
         sessionStorage.setItem("isShown2", false);
         sessionStorage.setItem(key, this.isShown3);
         sessionStorage.setItem("isShown4", false);
+        sessionStorage.setItem("isShown5", false);
       } else if (key == "isShown4") {
         this.isShown4 = !this.isShown4;
         sessionStorage.setItem("isShown1", false);
         sessionStorage.setItem("isShown2", false);
         sessionStorage.setItem("isShown3", false);
         sessionStorage.setItem(key, this.isShown4);
-      } else if (key == "langs") {
+        sessionStorage.setItem("isShown5", false);
+      } else if (key == "isShown5") {
+        this.isShown5 = !this.isShown5;
+        sessionStorage.setItem("isShown1", false);
+        sessionStorage.setItem("isShown2", false);
+        sessionStorage.setItem("isShown3", false);
+        sessionStorage.setItem("isShown4", false);
+        sessionStorage.setItem(key, this.isShown5);
+      }
+      else if (key == "langs") {
         this.langs = !this.langs;
         sessionStorage.setItem("isShown1", false);
         sessionStorage.setItem("isShown2", false);
         sessionStorage.setItem("isShown3", false);
         sessionStorage.setItem("isShown4", false);
+        sessionStorage.setItem("isShown5", false);
         sessionStorage.setItem(key, this.langs);
       } else {
         sessionStorage.setItem("isShown1", false);
         sessionStorage.setItem("isShown2", false);
         sessionStorage.setItem("isShown3", false);
         sessionStorage.setItem("isShown4", false);
+        sessionStorage.setItem("isShown5", false);
         sessionStorage.setItem("langs", false);
       }
     }

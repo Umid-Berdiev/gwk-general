@@ -47,7 +47,7 @@ class UserController extends Controller
   /**
    * Store a newly created resource in storage.
    *
-   * @param  \Illuminate\Http\Request  $request
+   * @param \Illuminate\Http\Request $request
    * @return \Illuminate\Http\Response
    */
   public function store(Request $request)
@@ -100,7 +100,7 @@ class UserController extends Controller
   /**
    * Show the form for editing the specified resource.
    *
-   * @param  int  $id
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function editByAxios(Request $request)
@@ -120,8 +120,8 @@ class UserController extends Controller
   /**
    * Update the specified resource in storage.
    *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
+   * @param \Illuminate\Http\Request $request
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function update(Request $request)
@@ -136,19 +136,22 @@ class UserController extends Controller
     $user->region_id = $request->regions;
     $user->user_email = $request->user_email;
     $user->org_name = $request->get('org_name');
-    $user->password = Hash::make($request->password);
+    $user->role_id = $request->roll_id;
+    if ($request->new_password) {
+      $user->password = Hash::make($request->new_password);
+    }
 
     $user->save();
 
     $user->syncRoles($request->roll_id);
 
-    UserAttr::where('user_id', $user->id)->delete();
-    foreach ($request->division_id as $key => $division) {
-      $user_attr = new UserAttr();
-      $user_attr->user_id = $user->id;
-      $user_attr->minvodxoz_division_id = $division;
-      $user_attr->save();
-    }
+//    UserAttr::where('user_id', $user->id)->delete();
+//    foreach ($request->division_id as $key => $division) {
+//      $user_attr = new UserAttr();
+//      $user_attr->user_id = $user->id;
+//      $user_attr->minvodxoz_division_id = $division;
+//      $user_attr->save();
+//    }
 
     return back();
   }
@@ -162,7 +165,7 @@ class UserController extends Controller
   /**
    * Remove the specified resource from storage.
    *
-   * @param  int  $id
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
 
