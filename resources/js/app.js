@@ -53,7 +53,7 @@ const sidebarMenu = new Vue({
       this.isShown4 = JSON.parse(sessionStorage.getItem("isShown4"));
     }
     if (sessionStorage.getItem("isShown5")) {
-      this.isShown4 = JSON.parse(sessionStorage.getItem("isShown5"));
+      this.isShown5 = JSON.parse(sessionStorage.getItem("isShown5"));
     }
     if (sessionStorage.getItem("langs")) {
       this.langs = JSON.parse(sessionStorage.getItem("langs"));
