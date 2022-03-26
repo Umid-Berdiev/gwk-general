@@ -161,13 +161,6 @@ Route::group(['middleware' => ['localization']], function () {
       Route::resource('users', UserController::class)->except(['edit', 'show']);
 
       Route::prefix('/object/information')->group(function () {
-        //Route::get('/', 'ObjectInformationController@cleanDouble')->name('clean-double');
-        //Route::get('/', 'ObjectInformationController@index')->name('object-information');
-        //Route::post('/', 'ObjectInformationController@index')->name('object-information-post');
-        //Route::post('/add-info', 'ObjectInformationController@AddInfoAjax')->name('add-object-info-ajax');
-        //Route::post('/add-area', 'ObjectInformationController@AddAreaAjax')->name('add-area-ajax');
-        //Route::post('/add-in-value', 'ObjectInformationController@AddInValueAjax')->name('add-in-value-ajax');
-        //Route::post('/add-out-value', 'ObjectInformationController@AddOutValueAjax')->name('add-out-value-ajax');
         Route::post('/import', 'ObjectInformationController@excelImport')->name('object-excel-import');
         Route::get('/export-information', 'ObjectInformationController@excelExport')->name('gvk-export-information');
       });

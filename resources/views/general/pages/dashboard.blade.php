@@ -51,12 +51,12 @@
     var date_gidro = <?php echo json_encode($dataGidro['date']); ?>;
     var count_gidro = <?php echo json_encode($dataGidro['count']); ?>;
 
-    var date = <?php echo json_encode($dataGeo['date'] ?? []); ?>;
-    var count = <?php echo json_encode($dataGeo['count'] ?? []); ?>;
 
-    var date = <?php echo json_encode($dataMin['date'] ?? []); ?>;
-    var count = <?php echo json_encode($dataMin['count'] ?? []); ?>;
+    var date_min = <?php echo json_encode($dataMin['date'] ?? []); ?>;
+    var count_min = <?php echo json_encode($dataMin['count'] ?? []); ?>;
 
+    var date_geo = <?php echo json_encode($dataGeo['date'] ?? []); ?>;
+    var count_geo = <?php echo json_encode($dataGeo['count'] ?? []); ?>;
 
     var barChartData_Gidro = {
       labels: date_gidro,
@@ -67,26 +67,30 @@
       }]
     };
 
-    var barChartData = {
-      labels: date,
-      datasets: [{
-        label: 'Гидрогеология',
-        backgroundColor: "#84c3e3",
-        data: count
-      }]
-    };
-
     var barChartData_minvadxoz = {
-      labels: date,
+      labels: date_min,
       datasets: [{
         label: 'Минвадхоз',
         backgroundColor: "#84c3e3",
-        data: count
+        data: count_min
       }]
     };
 
 
+    var barChartData = {
+      labels: date_geo,
+      datasets: [{
+        label: 'Гидрогеология',
+        backgroundColor: "#84c3e3",
+        data: count_geo
+      }]
+    };
+
+
+
+
     window.onload = function () {
+
       var ctx_2 = document.getElementById("Gidromet").getContext("2d");
       window.myBar = new Chart(ctx_2, {
         type: 'bar',
@@ -106,7 +110,6 @@
           }
         }
       });
-
 
       /********* Minvadxoz *******/
       var ctx_3 = document.getElementById("Minvadxoz").getContext("2d");

@@ -57,7 +57,7 @@ class DashboardController extends Controller
     }
 
     $logGidroGeologiya = DB::table('info_log')
-      ->whereIn('type',[4,5])
+      ->whereIn('type',[6,7])
       ->select(DB::raw('count(*)'),DB::raw('DATE(created_at) as date'))
       ->groupBy('date')
       ->orderBy('date','asc')

@@ -105,7 +105,7 @@
         </div>
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-secondary px-5" data-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Закрыть</button>
         @hasanyrole('Administrator|Editor')
         <button type="submit" class="btn btn-sm btn-primary">{{ __('messages.save') }}</button>
         @endhasanyrole
@@ -143,7 +143,7 @@
         </div>
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-secondary px-5" data-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
         @hasanyrole('Administrator|Editor')
         <button type="submit" class="btn btn-sm btn-primary">{{ __('messages.save') }}</button>
         @endhasanyrole
@@ -180,7 +180,7 @@
         </div>
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-secondary px-5" data-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Закрыть</button>
       </div>
     </form>
   </div>
