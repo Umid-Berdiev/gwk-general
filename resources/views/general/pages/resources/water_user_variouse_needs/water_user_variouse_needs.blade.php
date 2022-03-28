@@ -33,7 +33,7 @@
           <tr>
             <th scope="col" rowspan="3">{{ __('messages.Region') }}</th>
             <th scope="col" colspan="3">{{ __('messages.Water taken') }}</th>
-            <th scope="col" colspan="6">{ __('messages.By industry sectors') }}</th>
+            <th scope="col" colspan="6">{{ __('messages.By industry sectors') }}</th>
           </tr>
           <tr>
             <th scope="col">{{ __('messages.from surface sources') }}</th>

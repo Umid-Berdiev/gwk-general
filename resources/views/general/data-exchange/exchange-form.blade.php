@@ -35,11 +35,11 @@
         <div class="col-md-3">
           <button class="btn btn-sm btn-primary" name="action" value="data-api" type="submit">
             <i class="bi bi-filter"></i>
-            {{ __('messages.Open') }}
-          </button>
-          <button class="btn btn-sm btn-primary" name="action" value="data-base" type="submit">
-            <i class="bi bi-filter"></i>
             {{ __('messages.Выгрузка данных') }}
+          </button>
+          <button class="btn btn-sm btn-success" name="action" value="data-base" type="submit">
+            <i class="bi bi-filter"></i>
+            {{ __('messages.Поиск') }}
           </button>
         </div>
       </div>

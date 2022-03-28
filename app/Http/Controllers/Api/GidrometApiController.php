@@ -130,6 +130,7 @@ class GidrometApiController extends Controller
     $r_year = date('Y', strtotime($selected_date));
     $r_month = date('n', strtotime($selected_date));
     $r_days_in_month = date('t', strtotime($selected_date)); // shu oyda necha kun borligi
+    $allDatas = [];
 
     // 1) Оператив Амударё
     if ($selected_element == "operativeAmu") {

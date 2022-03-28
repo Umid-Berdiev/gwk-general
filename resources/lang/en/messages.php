@@ -242,5 +242,6 @@
 		"Добавить" => "Add",
 		"Units" => "Units",
 		"Количество данных, полученных за последние 10 дней" => "Number of data received in the last 10 days",
+		"Поиск" => "Search",
 	];
 ?>
