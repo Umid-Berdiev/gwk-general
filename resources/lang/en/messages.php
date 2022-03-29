@@ -165,7 +165,6 @@
 		"Mark" => "Mark",
 		"Chemistry list" => "Chemistry list",
 		"Name list chemical composition" => "Name list chemical composition",
-		"List chemical add form" => "List chemical add form",
 		"minimal" => "Minimal",
 		"To shape" => "To shape",
 		"Groundwater resources km3 year" => "Groundwater resources km3 year",
@@ -243,5 +242,9 @@
 		"Units" => "Units",
 		"Количество данных, полученных за последние 10 дней" => "Number of data received in the last 10 days",
 		"Поиск" => "Search",
+		"Water supply" => "Water supply",
+		"Water level" => "Water level",
+		"Редактировать" => "Edit",
+		"Enter year" => "Enter year",
 	];
 ?>

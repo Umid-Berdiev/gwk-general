@@ -18,33 +18,41 @@
 
     <div class="card-body">
       <div class="table-responsive">
-        <table class="table table-bordered table-sm small" id="exportable_table">
-          <thead>
-            <tr class="bir">
-              <th><input type="checkbox" id="markAll" value="1"></th>
-              <th>{{ __('messages.Number auther') }}</th>
-              <th>{{ __('messages.Cadaster number') }}</th>
-              <th>{{ __('messages.Mineralization') }}</th>
-              <th>{{ __('messages.Wells type') }}</th>
-              <th>{{ __('messages.Year') }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach($allDatas as $data)
-            <tr>
-              <td>
-                <input type="checkbox" name="object[]" class="gr-obj-class" data-status="0"
-                  data-name="{{ $data['number_auther'] }}" value="{{ $data['number_auther'] }}">
-              </td>
-              <td>{{ $data['number_auther'] ?? '' }}</td>
-              <td>{{ $data['cadaster_number'] ?? '' }}</td>
-              <td>{{ $data['mineralization'] ?? '' }}</td>
-              <td>{{ $data['well_type']['name'] ?? ($data['type_name'] ?? '') }}</td>
-              <td>{{ $data['year'] ?? '' }}</td>
-            </tr>
-            @endforeach
-          </tbody>
-        </table>
+        @if(isset($allDatas) && $allDatas)
+          <table class="table table-bordered table-sm small" id="exportable_table">
+            <thead>
+              <tr class="bir">
+                <th><input type="checkbox" id="markAll" value="1"></th>
+                <th>{{ __('messages.Number auther') }}</th>
+                <th>{{ __('messages.Cadaster number') }}</th>
+                <th>{{ __('messages.Mineralization') }}</th>
+                <th>{{ __('messages.Wells type') }}</th>
+                <th>{{ __('messages.Year') }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($allDatas as $data)
+              <tr>
+                <td>
+                  <input type="checkbox" name="object[]" class="gr-obj-class" data-status="0"
+                    data-name="{{ $data['number_auther'] }}" value="{{ $data['number_auther'] }}">
+                </td>
+                <td>{{ $data['number_auther'] ?? '' }}</td>
+                <td>{{ $data['cadaster_number'] ?? '' }}</td>
+                <td>{{ $data['mineralization'] ?? '' }}</td>
+                <td>{{ $data['well_type']['name'] ?? ($data['type_name'] ?? '') }}</td>
+                <td>{{ $data['year'] ?? '' }}</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        @else
+              <tr>
+                  <div class="text-center">
+                      Данные не найдены
+                  </div>
+              </tr>
+          @endif
       </div>
     </div>
   </div>

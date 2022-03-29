@@ -16,7 +16,7 @@
 
         <div class="col-3">
           <select required class="form-control form-control-sm" id="elements_form" name="selected_element"
-                  v-model="selectedElement">
+                  v-model="selectedElement" @change="onChange()">
             <option selected hidden value="">{{ __('messages.Select') }}</option>
             <option v-for="element in instanceElements" :value="element" v-text="element"
                     :selected="selectedElement == element">
@@ -25,11 +25,14 @@
         </div>
 
         <div class="col-2">
-          <input v-if="selectedElement == 'Rejim Gidro'" required type="number" min="1900" max="{{ date('Y') }}"
-                 value="{{ isset($selected_date) ? $selected_date : date('Y') }}" name="selected_date"
-                 class="form-control form-control-sm" placeholder="{{ __('messages.Year') }}" required>
-          <input v-else required type="month" name="selected_date" class="form-control form-control-sm"
-                 @isset($selected_date) value={{ $selected_date }} @endisset>
+          <div v-if="!selectInput">
+              <input v-if="selectedElement == 'Rejim Gidro'" required type="number" min="1900" max="{{ date('Y') }}"
+                   value="{{ isset($selected_date) ? $selected_date : date('Y') }}" name="selected_date"
+                   class="form-control form-control-sm" placeholder="{{ __('messages.Year') }}" required>
+            <input v-else required type="month" name="selected_date" class="form-control form-control-sm"
+                   @isset($selected_date) value={{ $selected_date }} @endisset>
+          </div>
+          <input type="number" class="form-control form-control-sm" required v-if="selectInput" placeholder="{{__('messages.Enter year')}}" min="1900" max="{{ date('Y') }}" @isset($r_year) value={{ $r_year }} @endisset name="selected_date">
         </div>
 
         <div class="col-md-3">
@@ -91,7 +94,8 @@
         return {
           instanceElements: [],
           selectedDate: null,
-          selectedElement: ""
+          selectedElement: "",
+          selectInput:false
         }
       },
       computed: {},
@@ -101,6 +105,14 @@
           await axios
             .get("{{ route('exchange.instance.elements') }}", {params: {instance: instance}})
             .then(response => this.instanceElements = response.data)
+        },
+
+        onChange(){
+             if(this.selectedElement == "{{__('messages.Volume month reservoir')}}"){
+                this.selectInput = true;
+            }else{
+              this.selectInput = false;
+            }
         }
       },
       mounted() {
@@ -110,6 +122,7 @@
           this.getInstanceElements(selectedInstance);
         }
         this.selectedElement = @if(isset($selected_element)) @json($selected_element) @else "" @endif;
+        this.onChange();
       }
     })
   </script>

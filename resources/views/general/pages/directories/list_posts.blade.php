@@ -74,12 +74,11 @@
                           class="btn btn-sm btn-outline-info waves-effect"><i class="bi bi-pencil"></i></button>
                 @endif
                 @if(\Auth::user()->role->name == 'Administrator')
-
-                  <button
-                    onclick="if ({{ __('messages.Are you sure you want to delete this thing into the database?') }}) {
-                      window.location.href='{{route('directories.list_posts.destroy',$name->id)}}'
-                      }" type="button" class="btn btn-sm btn-outline-danger waves-effect"><i
-                      class="bi bi-trash"></i></button>
+                <button onclick="if (confirm('Вы уверены, что хотите удалить эту вещь в базе данных?')) {
+                                    window.location.href='{{route('directories.list_posts.destroy',$name->id)}}'
+                                    } else {
+                                    }" type="button" class="btn btn-sm btn-outline-danger waves-effect"><i
+                  class="bi bi-x"></i></button>
                 @endif
               </td>
             </tr>
@@ -112,19 +111,19 @@
               <tr>
                 <th scope="row">№</th>
                 <td class="form-group">
-                  <input type="number" value="{{old('order')}}" name="order" class="form-control">
+                  <input type="number" required value="{{old('order')}}" name="order" class="form-control">
                 </td>
               </tr>
               <tr>
                 <th scope="row">{{ __('messages.Name of the water body') }}</th>
                 <td class="form-group">
-                  <input type="text" value="{{old('name')}}" name="name" class="form-control">
+                  <input type="text" required value="{{old('name')}}" name="name" class="form-control">
                 </td>
               </tr>
               <tr>
                 <th scope="row">{{ __('messages.Post title locations') }}</th>
                 <td class="form-group">
-                  <input type="text" value="{{old('post_place')}}" name="post_place" class="form-control">
+                  <input type="text" required value="{{old('post_place')}}" name="post_place" class="form-control">
                 </td>
               </tr>
               <tr>
@@ -168,13 +167,13 @@
               <tr>
                 <th scope="row">{{ __('messages.Name of the water body') }}</th>
                 <td class="form-group">
-                  <input type="text" value="{{old('name_edit')}}" name="name_edit" class="form-control" id="name_edit">
+                  <input type="text" required value="{{old('name_edit')}}" name="name_edit" class="form-control" id="name_edit">
                 </td>
               </tr>
               <tr>
                 <th scope="row">{{ __('messages.Post title locations') }}</th>
                 <td class="form-group">
-                  <input type="text" value="{{old('post_place_edit')}}" name="post_place_edit" class="form-control"
+                  <input type="text" required value="{{old('post_place_edit')}}" name="post_place_edit" class="form-control"
                          id="post_place_edit">
                 </td>
               </tr>

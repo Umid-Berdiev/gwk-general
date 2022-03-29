@@ -48,8 +48,8 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
   <script>
-    var date_gidro = <?php echo json_encode($dataGidro['date']); ?>;
-    var count_gidro = <?php echo json_encode($dataGidro['count']); ?>;
+    var date_gidro = <?php echo json_encode($dataGidro['date']?? []); ?>;
+    var count_gidro = <?php echo json_encode($dataGidro['count'] ?? []); ?>;
 
 
     var date_min = <?php echo json_encode($dataMin['date'] ?? []); ?>;

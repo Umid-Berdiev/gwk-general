@@ -106,7 +106,7 @@
               <tr>
                 <th scope="row">{{ __('messages.Name') }}</th>
                 <td class="form-group">
-                  <input type="text" value="{{old('name')}}" name="name" class="form-control">
+                  <input type="text" required value="{{old('name')}}" name="name" class="form-control">
                 </td>
               </tr>
             </tbody>
@@ -130,7 +130,7 @@
       @csrf
       <input type="hidden" name="id" id="hidden">
       <div class="modal-header bg-primary text-white">
-        <h4 class="modal-title" id="exampleModalLabel">{{ __('messages.List chemical add form') }}</h4>
+        <h4 class="modal-title" id="exampleModalLabel">{{ __('messages.Редактировать') }}</h4>
         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -142,7 +142,7 @@
               <tr>
                 <th scope="row">{{ __('messages.Name') }}</th>
                 <td class="form-group">
-                  <input type="text" value="{{old('name')}}" name="name" class="form-control" id="name_edit">
+                  <input type="text" required value="{{old('name')}}" name="name" class="form-control" id="name_edit">
                 </td>
               </tr>
             </tbody>

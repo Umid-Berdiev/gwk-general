@@ -52,15 +52,21 @@ class DataExchangeController extends Controller
   protected function getInstanceElementData(Request $request)
   {
     $instances = $this->getInstances();
+    if(strlen($request->selected_date) == 4){
+      $request->selected_date .="-01";
+    }
+
     $selected_date = $request->selected_date;
     $selected_element = $request->selected_element;
     $selected_instance = $request->selected_instance;
     $action = $request->action;
-
     $r_year = date('Y', strtotime($selected_date));
     $r_month = date('n', strtotime($selected_date));
     $r_days_in_month = date('t', strtotime($selected_date)); // shu oyda necha kun borligi
     $response = null;
+    $allDatas = [];
+    $firstData = [];
+
 
     // 1) Оператив Амударё
     if ($selected_element == trans("messages.Operative Amu")) {
@@ -250,6 +256,7 @@ class DataExchangeController extends Controller
               ->get()
               ->toArray();
           }
+
           foreach ($totalResult as $value){
             $allDatas[date('d_m_Y', strtotime($value['dateCr']))][] = $value;
           }
