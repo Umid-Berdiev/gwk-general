@@ -157,8 +157,8 @@ class DataExchangeController extends Controller
         $result = [];
         foreach ($allDatas as $infor) {
           $key = $infor['gvk_object_id'] . '_' . date('d_m_Y', strtotime($infor['date']));
-          $result[$key] = $infor['average'];
-          $result[$key . '_sr'] = $infor['value'];
+          $result[$key] = $infor['value'];
+          $result[$key . '_sr'] = $infor['average'];
           $result[$key . '_id'] = $infor['id'];
         }
 
