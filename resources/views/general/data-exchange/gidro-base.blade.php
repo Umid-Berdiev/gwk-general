@@ -22,7 +22,7 @@
           <div v-if="isLoading" class="spinner-grow position-absolute"
             style="width: 3rem; height: 3rem; left: 50%; top: 50%;" role="status">
           </div>
-          @if(isset($allDatas) && $allDatas)
+          @if(isset($allDatas[0]) && $allDatas[0])
             <table class="table table-bordered table-sm small" id="exportable_table">
               <thead>
                 <tr class="bir">

@@ -108,7 +108,7 @@
         },
 
         onChange(){
-             if(this.selectedElement == "{{__('messages.Volume month reservoir')}}"){
+             if(this.selectedElement == ("{{__('messages.Volume month reservoir')}}") || this.selectedElement == ("{{__('messages.Rejim Gidro')}}") || this.selectedElement == ("{{__('messages.Place birth')}}") || this.selectedElement == ("{{__('messages.Well')}}")){
                 this.selectInput = true;
             }else{
               this.selectInput = false;

@@ -246,5 +246,6 @@
 		"Water level" => "Water level",
 		"Редактировать" => "Edit",
 		"Enter year" => "Enter year",
+		"Create" => "Create",
 	];
 ?>

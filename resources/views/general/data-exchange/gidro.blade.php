@@ -1,5 +1,4 @@
 @extends('layouts.master')
-
 @section('content')
 <div class="py-3">
   <div class="container-fluid">
@@ -22,6 +21,7 @@
           <div v-if="isLoading" class="spinner-grow position-absolute"
             style="width: 3rem; height: 3rem; left: 50%; top: 50%;" role="status">
           </div>
+          @if(isset($allDatas[0]) && $allDatas[0])
           <table class="table table-bordered table-sm small" id="exportable_table">
             <thead>
               <tr class="bir">
@@ -38,7 +38,6 @@
             </thead>
             <tbody class="text-right">
               @forelse($allDatas as $data)
-              {{-- @dd($data) --}}
               <tr>
                 <td class="text-center">
                   <input type="checkbox" v-model="checkList" value="{{ $data['id'] }}">
@@ -64,6 +63,11 @@
               @endforelse
             </tbody>
           </table>
+          @else
+              <div class="text-center">
+                  Данные не найдены
+              </div>
+          @endif
         </div>
       </div>
     </div>

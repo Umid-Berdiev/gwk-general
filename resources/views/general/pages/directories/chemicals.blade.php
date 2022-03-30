@@ -94,7 +94,7 @@
     <form method="post" action="{{route('directories.chemicals.store')}}" class="modal-content">
       @csrf
       <div class="modal-header bg-primary text-white">
-        <h4 class="modal-title" id="exampleModalLabel">{{ __('messages.List chemical add form') }}</h4>
+        <h4 class="modal-title" id="exampleModalLabel">{{ __('messages.Create') }}</h4>
         <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

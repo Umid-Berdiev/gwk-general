@@ -35,10 +35,15 @@
     <div class="row">
       <div class="col-md-10 offset-md-1">
         <div class="panel panel-default">
-          <div class="panel-heading">{{__('messages.Количество данных, полученных за последние 10 дней')}}</div>
+          <div class="panel-heading"></div>
           <div class="panel-body">
+            {{ __('messages.Gidromet') }}, {{__('messages.Количество данных, полученных за последние 10 дней')}}
             <canvas id="Gidromet" height="280" width="600"></canvas>
+            <br>
+            {{ __('messages.Minvodxoz') }}, {{__('messages.Количество данных, полученных за последние 10 дней')}}
             <canvas id="Minvadxoz" height="280" width="600"></canvas>
+            <br>
+            {{ __('messages.Gidrogeologiya') }}, {{__('messages.Количество данных, полученных за последние 10 дней')}}
             <canvas id="Geologiya" height="280" width="600"></canvas>
           </div>
         </div>
@@ -62,7 +67,7 @@
       labels: date_gidro,
       datasets: [{
         label: 'Гидромет',
-        backgroundColor: "#84c3e3",
+        backgroundColor: "#68d47c",
         data: count_gidro
       }]
     };
@@ -71,7 +76,7 @@
       labels: date_min,
       datasets: [{
         label: 'Минвадхоз',
-        backgroundColor: "#84c3e3",
+        backgroundColor: "#f5a2c3",
         data: count_min
       }]
     };
@@ -81,7 +86,7 @@
       labels: date_geo,
       datasets: [{
         label: 'Гидрогеология',
-        backgroundColor: "#84c3e3",
+        backgroundColor: "#91abd9",
         data: count_geo
       }]
     };

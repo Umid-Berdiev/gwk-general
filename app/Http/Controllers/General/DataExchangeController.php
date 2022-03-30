@@ -441,7 +441,9 @@ class DataExchangeController extends Controller
       $selected_element = $request->selected_element;
       $selected_date = $request->selected_date;
       $selected_instance = $request->selected_instance;
-      $logs = InfoLog::where('type',$request->type)->paginate(15);
+      $logs = InfoLog::where('type',$request->type)
+      ->orderBy('created_at','desc')
+      ->paginate(15);
       return view('general.data-exchange.log',compact(
          'selected_element',
          'action',
