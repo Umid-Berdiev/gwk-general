@@ -251,5 +251,4 @@ return [
   'gidrogeologiyaApiKey' => 'gidrogeologiyap2lbgWkFrykA4QyUmpHihzmc5BNzIABqapi',
 
   "API_KEY" => "generalp2lbgWkFrykA4QyUmpHihzmc5BNzIABqapi",
-  'appName' => 'ГОСУДАРСТВЕННЫЙ ВОДНЫЙ КАДАСТР РЕСПУБЛИКИ УЗБЕКИСТАН',
 ];
